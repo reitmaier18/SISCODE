@@ -42,7 +42,7 @@
                     <form action="main.php" method="POST">
                         <div class="md-form textbox" id="textbox1">
                             <img src="img/icon2.png" class="prefix">
-                            <input type="text" id="bloquear" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                            <input type="text" name="user" id="bloquear" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                             <label for="bloquear" data-error="wrong" data-success="right">Usuario</label>                            
                         </div>
                         <div class="md-form textbox" id="textbox2">
