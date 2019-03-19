@@ -40,13 +40,15 @@
                     </div>
                     <h2>Iniciar Sesión</h2>        
                     <form action="main.php" method="POST">
-                        <div class="textbox" id="textbox1" onclick="cambiar_border_color_textbox1();">
-                            <img src="img/icon2.png">
-                            <input type="text" name="user" placeholder="Usuario" id="bloquear" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event);">
+                        <div class="md-form textbox" id="textbox1">
+                            <img src="img/icon2.png" class="prefix">
+                            <input type="text" id="bloquear" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                            <label for="bloquear" data-error="wrong" data-success="right">Usuario</label>                            
                         </div>
-                        <div class="textbox" id="textbox2" onclick="cambiar_border_color_textbox2();">
-                            <img src="img/icon3.png">
-                            <input type="password" name="password" placeholder="Contraseña" id="bloquearb" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <div class="md-form textbox" id="textbox2">
+                            <img src="img/icon3.png" class="prefix">
+                            <input type="password" name="password" id="bloquearb" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                            <label for="bloquearb" data-error="wrong" data-success="right">Contraseña</label>
                         </div>
                         <input id="send" type="submit" value="Iniciar">
                     </form>

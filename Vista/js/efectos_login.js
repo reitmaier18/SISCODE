@@ -29,14 +29,3 @@ window.onload = function() {
   }
 }
 
-function cambiar_border_color_textbox1() {
-  document.getElementById('textbox1').style.border="1px solid blue";
-  document.getElementById('textbox2').style.border="none";
-}
-
-function cambiar_border_color_textbox2() {
-  document.getElementById('textbox1').style.border="none";
-  document.getElementById('textbox2').style.border="1px solid blue";
-}
-
-
