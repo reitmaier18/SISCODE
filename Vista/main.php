@@ -20,7 +20,7 @@
             <div class="header-logo">
                 <img src="img/logo2.png">   
             </div>
-            <h1>Jurisdicción Disciplinaria Judicial</h1>
+            <h1>Sistema de Control y Distribución de Expedientes</h1>
         </header>
     </div>
 
