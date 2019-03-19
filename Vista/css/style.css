@@ -15,7 +15,7 @@ body
 
 header
 {
-	height: 70px;
+	height: 90px;
 	text-align: center;
 	background-color: #070D59;
 }
@@ -23,7 +23,7 @@ header
 .header-logo
 {
 	width: 110px;
-	height: 70px;
+	height: 90px;
 	float: left;
 	background-color: #EAEDED;
 	border-top-right-radius: 50px;
@@ -35,7 +35,7 @@ header
 .header-logo img
 {
 	width: 100px;
-	height: 70px;
+	height: 90px;
 }
 
 header h1
@@ -43,7 +43,10 @@ header h1
 	width: 1200px;
 	color: white;
 	text-align: center;
-	padding: 10px;
+	padding: 20px;
 }
 
-
+nav
+{
+	background-color: #4447a3;	
+}
