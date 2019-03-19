@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Proyecto III</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/est_login.css">
+</head>
+<body>
+    <!--Este es el header-->
+    <div class="container-fluid">
+        <header>
+            <div class="header-logo">
+                <img src="img/logo2.png">   
+            </div>
+            <h1>Jurisdicción Disciplinaria Judicial</h1>
+        </header>
+    </div>
+    <!--Este es el login-->
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-sm-6">
+                <div class="login-wallpaper">
+                    <img src="img/wallpaper2.jpg">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="login-box">
+                    <div class="login-icon">
+                        <center>
+                            <img src="img/icon1.png">
+                        </center>
+                    </div>
+                    <h2>Iniciar Sesión</h2>        
+                    <form action="main.php" method="POST">
+                        <div class="textbox" id="textbox1" onclick="cambiar_border_color_textbox1();">
+                            <img src="img/icon2.png">
+                            <input type="text" name="user" placeholder="Usuario" id="bloquear" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event);">
+                        </div>
+                        <div class="textbox" id="textbox2" onclick="cambiar_border_color_textbox2();">
+                            <img src="img/icon3.png">
+                            <input type="password" name="password" placeholder="Contraseña" id="bloquearb" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        </div>
+                        <input id="send" type="submit" value="Iniciar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="js/efectos_login.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.js"></script>
+</body>
+</html>

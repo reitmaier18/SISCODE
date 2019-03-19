@@ -1,0 +1,112 @@
+.login-wallpaper
+{
+	margin-top: 30px;
+	width: 100%;
+	height: 100%;
+	float: left;
+	background-color: #F3F4FD;
+}
+
+.login-wallpaper img
+{
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+.login-box
+{
+	padding: 0%;
+	margin-top: 30px;
+	width: 100%;
+	height: 100%;
+	float: left;
+	background-color: #EAEDED;
+	opacity: 0.9;
+}
+
+.login-icon
+{
+	width: 70px;
+	height: 70px;
+	margin-left: 43%;
+	margin-top: -30px;
+	background-color: white;
+	border-radius: 50px;
+	border-style: solid;
+	border-color: #EAEDED;
+	float: left;
+}
+
+.login-icon img
+{
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+
+.login-box h2
+{
+	margin-top: 80px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.textbox
+{
+	width: 60%;
+	height: 40px;
+	margin-left: 20%;
+	margin-bottom: 5%;
+	border-radius: 10px;
+	background-color: white;
+	
+}
+
+.textbox img
+{
+	opacity: 0.6;
+	margin-top: 2.5%;
+	margin-left: 2.5%;
+	float: left;
+}
+
+.textbox input
+{
+	width: 88%;
+	height: 100%;
+	margin-left: 2.5px;
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 15px;
+	
+}
+
+#send
+{
+	margin-left: 40%;
+	width: 100px;
+	height: 50px;
+	background-color: #070D59;
+	border: none;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 30px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 0px;
+	color: white;
+	font-size: 15px;
+	transition: 0.5s all
+}
+
+#send:hover
+{
+	background-color: #48AACE;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 30px;
+}
+

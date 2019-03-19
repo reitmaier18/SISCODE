@@ -1,0 +1,47 @@
+*
+{
+	margin: 0;
+}
+
+body
+{
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	background-image: url(../img/wallpaper12.jpg);
+	background-size: cover;
+	background-repeat:  no-repeat;
+}
+
+header
+{
+	height: 70px;
+	text-align: center;
+	background-color: #070D59;
+}
+
+.header-logo
+{
+	width: 110px;
+	height: 70px;
+	float: left;
+	background-color: #EAEDED;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	overflow: hidden;
+	box-shadow: 1.5px 0px black;
+}
+
+.header-logo img
+{
+	width: 100px;
+	height: 70px;
+}
+
+header h1
+{
+	width: 1200px;
+	color: white;
+	text-align: center;
+	padding: 10px;
+}
