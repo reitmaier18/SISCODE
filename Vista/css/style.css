@@ -80,9 +80,27 @@ nav
 
 #inicio
 {
-	margin-top: 10%;
+	margin-top: 5%;
 	background-color: #e2e2f8;
 	
+	opacity: 0.9;
+	border-radius: 10px;
+}
+
+#user_a
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;
+}
+
+#user_b
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
 	opacity: 0.9;
 	border-radius: 10px;
 }

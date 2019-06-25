@@ -1,0 +1,34 @@
+create table sisco.nacionalidad (id serial not null, nac varchar(2), constraint id_nacionalidad primary key(id));
+
+create table sisco.rol (id serial not null, rol varchar(20), constraint id_rol primary key(id));
+
+create table sisco.estado (id serial not null, estado varchar(20), constraint id_estado primary key(id));
+
+create table sisco.tribunal (id serial not null, tribunal varchar(100), estado_id integer, constraint id_tribunal primary key(id), constraint estado_fk foreign key(estado_id) references sisco.estado(id));
+
+create table sisco.usuario (id serial not null, rol_id integer, nombre varchar(20), apellido varchar(20), nacionalidad_id integer, cedula integer, usuario varchar(20), password varchar(20), estatus integer not null, constraint id_usuario primary key(id), constraint rol_fk foreign key(rol_id) references sisco.rol(id), constraint nacionalidad_fk foreign key(nacionalidad_id) references sisco.nacionalidad(id));
+
+create table sisco.solicitante_externo (id serial not null, nombre varchar(20), apellido varchar(20), nacionalidad_id integer, cedula integer, constraint id_solicitante_externo primary key(id), constraint nacionalidad_fk foreign key(nacionalidad_id) references sisco.nacionalidad(id));
+
+create table sisco.nacionalidad_procesado (id serial not null, nac varchar(2), constraint id_nacionalidad_procesado primary key(id));
+
+create table sisco.procesado (id serial not null, nombre_acusado varchar(20), apellido_acusado varchar(20), nacionalidad_procesado_id integer, cedula_acusado integer not null, tribunal_id integer, constraint id_procesado primary key(id), constraint nacionalidad_procesado_fk foreign key(nacionalidad_procesado_id) references sisco.nacionalidad_procesado(id), constraint tribunal_fk foreign key(tribunal_id) references sisco.tribunal(id));
+
+create table sisco.expediente (id serial not null, numero_expediente varchar(50), procesado_id integer not null, constraint id_expediente primary key(id), constraint procesado_fk foreign key(procesado_id) references sisco.procesado(id));
+
+create table sisco.ubicacion (id serial not null, ubicacion varchar(50), constraint id_ubicacion primary key(id));
+
+create table sisco.pieza (id serial not null, expediente_id integer not null, numero_folio integer, ubicacion_id integer not null, constraint id_pieza primary key(id), constraint expediente_fk foreign key(expediente_id) references sisco.expediente(id), constraint ubicacion_fk foreign key(ubicacion_id) references sisco.ubicacion(id));
+
+create table sisco.expediente_asociado (id serial not null, expediente_id integer, numero_expediente_asociado varchar(50), constraint id_expediente_asociado primary key(id), constraint expediente_fk foreign key(expediente_id) references sisco.expediente(id));
+
+create table sisco.pieza_asociada (id serial not null, expediente_asociado_id integer, numero_folio integer, ubicacion_id integer not null, constraint id_pieza_asociada primary key(id), constraint expediente_asociado_fk foreign key(expediente_asociado_id) references sisco.expediente_asociado(id), constraint ubicacion_fk foreign key(ubicacion_id) references sisco.ubicacion(id));
+
+create table sisco.solicitud_interna (id serial not null, fecha date, usuario_id integer not null, pieza_id integer not null, constraint id_solicitud_interna primary key(id), constraint usuario_fk foreign key(usuario_id) references sisco.usuario(id), constraint pieza_fk foreign key(pieza_id) references sisco.pieza(id));
+
+create table sisco.solicitud_interna_pieza_asociada (id serial not null, fecha date, usuario_id integer not null, pieza_asociada_id integer not null, constraint id_solicitud_interna_asociada primary key(id), constraint usuario_fk foreign key(usuario_id) references sisco.usuario(id), constraint pieza_asociada_fk foreign key(pieza_asociada_id) references sisco.pieza_asociada(id));
+
+create table sisco.solicitud_externa_pieza_asociada (id serial not null, fecha date, solicitante_id integer not null, pieza_asociada_id integer not null, constraint id_solicitud_externa_asociada primary key(id), constraint solicitante_fk foreign key(solicitante_id) references sisco.solicitante_externo(id), constraint pieza_asociada_fk foreign key(pieza_asociada_id) references sisco.pieza_asociada(id));
+
+create table sisco.solicitud_externa_pieza (id serial not null, fecha date, solicitante_id integer not null, pieza_id integer not null, constraint id_solicitud_externa primary key(id), constraint solicitante_fk foreign key(solicitante_id) references sisco.solicitante_externo(id), constraint pieza_fk foreign key(pieza_id) references sisco.pieza(id));
+
