@@ -104,3 +104,21 @@ nav
 	opacity: 0.9;
 	border-radius: 10px;
 }
+
+#expediente_a
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;
+}
+
+#expediente_b
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;
+}
