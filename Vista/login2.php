@@ -12,6 +12,10 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/est_login.css">
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="js/efectos_login.js"></script>
 </head>
 <body>
     <!--Este es el header-->
@@ -39,7 +43,7 @@
                         </center>
                     </div>
                     <h2>Iniciar Sesión</h2>        
-                    <form action="main.php" method="POST">
+                    <form action="../Controlador/login_contrl.php" method="POST">
                         <div class="md-form textbox" id="textbox1">
                             <img src="img/icon2.png" class="prefix">
                             <input type="text" name="user" id="bloquear" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
@@ -57,10 +61,7 @@
         </div>
     </div>
     
-    <!-- SCRIPTS -->
-    <script type="text/javascript" src="js/efectos_login.js"></script>
-    <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->

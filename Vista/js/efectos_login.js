@@ -29,3 +29,14 @@ window.onload = function() {
   }
 }
 
+function user(valor) {
+  $.ajax({
+    url:'../../Controlador/login_contrl.php',
+    type: 'POST',
+    data: 'envio='+valor,
+  }).done(function (respuesta) {
+    var datos = eval(respuesta);
+    alert(valor);
+  });
+  
+}

@@ -45,3 +45,8 @@ function mostrar_mod_expediente_b() {
     document.getElementById('expediente_b').style.display="block";
     //document.getElementsByClassName('inicio').style.display="block";
 }
+
+//pruebas del jquery
+
+
+
