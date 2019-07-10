@@ -48,5 +48,28 @@ function mostrar_mod_expediente_b() {
 
 //pruebas del jquery
 
+function enviar_formulario() {
+    var dato = $('#form_actua_user').serialize();
+    alert(dato);
+    /*$.ajax({
+        url:'#',
+        type:'POST',
+        data: 'envio='+dato,
+    }).done(function(respuesta){
 
+        var llenar_inputs = eval(respuesta);
+
+            
+                for (i =0; i < llenar_inputs.length; i++) {
+                    
+                    datos=llenar_inputs[i][0]+"*"+llenar_inputs[i][1]+"*"+llenar_inputs[i][2];
+                    var d = datos.split("*");
+                        $("#nombre").val(datos[0]);
+
+                    }
+
+
+
+    });*/
+}
 

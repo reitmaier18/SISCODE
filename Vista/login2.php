@@ -43,7 +43,7 @@
                         </center>
                     </div>
                     <h2>Iniciar Sesión</h2>        
-                    <form action="../Controlador/login_contrl.php" method="POST">
+                    <form action="#" method="POST" id="formulario">
                         <div class="md-form textbox" id="textbox1">
                             <img src="img/icon2.png" class="prefix">
                             <input type="text" name="user" id="bloquear" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
@@ -54,7 +54,7 @@
                             <input type="password" name="password" id="bloquearb" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                             <label for="bloquearb" data-error="wrong" data-success="right">Contraseña</label>
                         </div>
-                        <input id="send" type="submit" value="Iniciar">
+                        <input id="send" type="button" value="Iniciar" onclick="formulario_login();">
                     </form>
                 </div>
             </div>

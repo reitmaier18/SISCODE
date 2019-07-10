@@ -7,8 +7,6 @@
     $db = new db();
     $db->_construct();
     $user = new usuario();
-    //echo json_encode($_POST['envio']);
-    
     $login = $user->login($_POST['user'], $_POST['password']);
     $u = base64_decode($login[2]);
     $p = base64_decode($login[3]);    
@@ -19,36 +17,40 @@
                 //echo "Entraste";
                 $estatus = $user->iniciar_sesion($_POST['user'], $_POST['password']);
                 if ($estatus == 'FALSE') {
-                    echo $estatus;                    
+                    
                 }else {
                     session_start();
                     $_SESSION['nombre']=$login[0];
                     $_SESSION['apellido']=$login[1];
                     $_SESSION['usuario']=$_POST['user'];
                     $_SESSION['rol']=$login[4];
-                    echo $_SESSION['user'];
-                    header('Location:../Vista/main.php');
+                    echo json_encode(1);
+                    
                 }
                 break;
             
             case 1:
+                
                 echo "Este usuario se encuentra activo en otro navegador o PC, por favor cerrar sesión para poder ingresar";
                 break;
             
             case 2:
+                
                 echo "Este usuario se encuentra bloqueado";
                 break;    
 
             default:
-                # code...
+                #
                 break;
         }
         
+        
     }
     else {
-        header('Location:../Vista/login2.php');
+        echo json_encode(0); 
     }
+    
     //$login[];
     //var_dump($login);
-    
+   
 ?>
