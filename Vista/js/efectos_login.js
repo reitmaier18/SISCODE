@@ -8,15 +8,15 @@ function formulario_login() {
   }).done(function (respuesta) {
     var datos = eval(respuesta);
     //alert(datos);
-    
+    /*
     if (datos===1) {
       //alert('Aqui estoy');
       window.location="main.php";
     }else{
       alert('Usuario o contrasena invalidos');
     }
+    */
     
-    /*
     switch (datos) {
       case 0:
         alert('Usuario o contrasena invalidos');
@@ -36,7 +36,7 @@ function formulario_login() {
 
       default:
         break;
-    }*/
+    }
     //window.location="main.php";
 
   }).fail(function () {

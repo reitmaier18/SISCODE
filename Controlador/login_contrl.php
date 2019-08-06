@@ -30,13 +30,13 @@
                 break;
             
             case 1:
-                
-                echo "Este usuario se encuentra activo en otro navegador o PC, por favor cerrar sesión para poder ingresar";
+                echo json_encode(2);
+                //echo "Este usuario se encuentra activo en otro navegador o PC, por favor cerrar sesión para poder ingresar";
                 break;
             
             case 2:
-                
-                echo "Este usuario se encuentra bloqueado";
+                echo json_encode(3);
+                //echo "Este usuario se encuentra bloqueado";
                 break;    
 
             default:

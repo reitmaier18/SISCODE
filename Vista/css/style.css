@@ -122,3 +122,23 @@ nav
 	opacity: 0.9;
 	border-radius: 10px;
 }
+
+#expediente_c
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;
+}
+
+#oculto
+{
+	display:none;
+}
+
+#btn-oculto
+{
+	border-radius: 50px;
+	
+}
