@@ -45,6 +45,16 @@
                 return 1;
             }
         }
+
+        /*
+        * Función para consultar tribunales
+        */
+        function consultar_tribunal_estado($id){
+            $sql = ("select tribunal, estado_id from sisco.tribunal inner join sisco.estado on sisco.tribunal.estado_id = sisco.estado.id where sisco.tribunal.id = '$id'");
+            $query=pg_query($sql);
+            $fila=pg_fetch_array($query, 0, PGSQL_NUM);
+            return $fila;
+        }
     }
     
 ?>

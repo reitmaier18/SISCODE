@@ -14,6 +14,12 @@
             return $fila; 
         }
 
+        function consul_procesado($id){
+            $sql = ("select nombre_acusado, apellido_acusado, nacionalidad, cedula_acusado from sisco.procesado where id = '$id'");
+            $query = pg_query($sql);
+            $fila=pg_fetch_array($query, 0, PGSQL_NUM);
+            return $fila; 
+        }
 
         function registrar_procesado($nombre, $apellido, $nac, $ci){
             $verifico = $this->consultar_procesado($nac,$ci);

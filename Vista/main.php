@@ -296,17 +296,17 @@
                     <!--2 Formularios del Expediente -->
                     <div class="col-md-8" id="expediente_b">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Actualizar expediente</h2>
-                        <form method="post" class="col-md-12">
+                        <form id="form_act_expe" method="post" class="col-md-12">
                             <div class="input-group text-center">
                                 <div class="md-form textbox col-md-4 offset-md-4 text-center" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
-                                    <input type="text" name="#" id="m" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <input type="text" name="expediente_actualizar" id="m" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                     <label for="m" data-error="wrong" data-success="right">Numero del expediente</label>                            
                                 </div>                                
                             </div>
                             <div class="input-group">
                                 <div class="md-form col-md-2 offset-md-3">
-                                    <input type="button" class="btn btn-primary" value="Siguiente" data-toggle="modal" data-target="#actualizar_expediente">    
+                                    <input type="button" class="btn btn-primary" value="Siguiente" onclick="enviar_form_act_expe();" data-toggle="modal" data-target="#actualizar_expediente">    
                                 </div> 
                                 <div class="md-form col-md-2 offset-md-1 ">
                                     <input type="reset" class="btn btn-danger" value="Cancelar">
@@ -501,36 +501,36 @@
                 <form class="col-md-12" id="form_actualizar_expediente">
                             <div class="input-group">
                                 <div class="textbox col-md-4 offset-md-1" id="textbox1">
-                                    <label for="h">Numero del expediente</label>                            
-                                    <input type="text" name="numero_expe" id="h" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="numero_expe_update">Numero del expediente</label>                            
+                                    <input type="text" name="numero_expe" id="numero_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                 </div>
                             
                                 
                                 <div class="md-form textbox col-md-2">
-                                    <select class="browser-default custom-select custom-select-md btn-blue-grey" name="nac">
+                                    <select class="browser-default custom-select custom-select-md btn-blue-grey" name="nac" id="nac_expe_update">
                                         <option disabled selected>Nac</option>
                                         <option value="1">V-</option>
                                         <option value="2">E-</option>
                                     </select>
                                 </div>
                                 <div class="textbox col-md-4 " id="textbox1">
-                                    <label for="i">Cedula del procesado</label>
-                                    <input type="text" name="ci_procesado" id="i" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="ci_proc_expe_update">Cedula del procesado</label>
+                                    <input type="text" name="ci_procesado" id="ci_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                 </div>                                
                             </div>
                             <div class="input-group">
                                 <div class="textbox col-md-4 offset-md-1" id="textbox1">
-                                    <label for="j">Nombre del procesado</label>                            
-                                    <input type="text" name="nombre_procesado" id="j" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="nombre_proc_expe_update">Nombre del procesado</label>                            
+                                    <input type="text" name="nombre_procesado" id="nombre_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                 </div>
                                 <div class="textbox col-md-4 offset-md-2" id="textbox1">
-                                    <label for="k">Apellido del procesado</label>                            
-                                    <input type="text" name="apellido_procesado" id="k" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="apellido_proc_expe_update">Apellido del procesado</label>                            
+                                    <input type="text" name="apellido_procesado" id="apellido_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                 </div>
                             </div>
                             <div class="input-group">
                                 <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales();" id="estado">
+                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update">
                                         <option disabled selected>Estado</option>
                                         <option value="1">Amazonas</option>
                                         <option value="2">Anzoátegui</option>
@@ -557,25 +557,10 @@
                                         <option value="23">Yaracuy</option>
                                         <option value="24">Zulia</option>
                                     </select>                            
-                                </div>
-                                <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="ubicacion">
-                                        <option disabled selected>Ubicación</option>
-                                        <option value="1">Tribunal 1</option>
-                                        <option value="2">Tribunal 2</option>
-                                        <option value="3">Tribunal 3</option>
-                                        <option value="4">Corte 1</option>
-                                        <option value="5">Corte 2</option>
-                                        <option value="6">Corte 3</option>
-                                        <option value="7">Sustanciacion</option>
-                                        <option value="8">Secretaria del tribunal</option>
-                                        <option value="9">Secretaria de la corte</option>
-                                        <option value="10">Archivo</option>
-                                    </select>                            
-                                </div>
+                                </div>                                
                             </div>
                             <div class="input-group">
-                                <div class="md-form col-md-10 offset-md-1" id="tribunal">
+                                <div class="md-form col-md-10 offset-md-1" id="tribunal_update">
                                     <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="tribunal">                                        
                                     </select>                            
                                 </div>
@@ -587,7 +572,7 @@
                             </div>
                             <div class="input-group">
                                 <div class="col-md-2 offset-md-3">
-                                    <input type="button" class="btn btn-primary" onclick="enviar_form_regis_expe();" value="Registrar">    
+                                    <input type="button" class="btn btn-primary" onclick="#" value="Registrar">    
                                 </div> 
                                 <div class="col-md-2 offset-md-1 ">
                                     <input type="reset" class="btn btn-danger" value="Cancelar">

@@ -62,13 +62,13 @@ function listar_tribunales(){
 }
 
 function listar_tribunales_update(){
-    var dato = document.getElementById('estado').value;
+    var dato = document.getElementById('estado_update').value;
     $.ajax({
         url:'./../Controlador/listar_tribunales_contrl.php',
         type:'POST',
         data: "envio= "+dato,
     }).done(function(respuesta){
-        $('#tribunal select').html(respuesta).fadeIn();           
+        $('#tribunal_update select').html(respuesta).fadeIn();           
     });
 }
 
@@ -194,8 +194,40 @@ function enviar_form_regis_expe(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-        alert(respuesta);
-        window.location="main.php"; 
+        //alert(respuesta);
+        var datos = eval(respuesta);
+        
     });
 }
 
+/*
+* función para enviar datos del expediente para ser actualizados
+*/
+function enviar_form_act_expe(){
+    var dato = $('#form_act_expe').serialize();
+    $.ajax({
+        url:'./../Controlador/consultar_expediente_contrl.php',
+        type:'POST',
+        data: dato,
+    }).done(function(respuesta){
+        //alert(respuesta);
+        if (respuesta=='Este expediente no existe') {
+            alert(respuesta);
+        }else{
+            var datos = eval(respuesta);
+            //alert (datos['nombre']);    
+            //alert(datos[1]);
+            $("#numero_expe_update").val(datos[0]);
+            $("#nac_expe_update").val(datos[5]);
+            $("#ci_proc_expe_update").val(datos[6]);
+            $("#nombre_proc_expe_update").val(datos[3]);
+            $("#apellido_proc_expe_update").val(datos[4]);
+            $("#estado_update").val(datos[2]);
+            $('#tribunal_update select').html(datos[1]).fadeIn();
+        }
+        
+        
+        
+        //window.location="main.php";*/
+    });
+}
