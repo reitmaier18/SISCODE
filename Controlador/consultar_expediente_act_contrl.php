@@ -11,7 +11,7 @@
     $tribunal = new tribunal();
     $data = $expediente->consultar_datos_expediente($_POST['value']);
     if ($data=='Este expediente no existe') {
-        echo ($data);
+        echo 0;
     }else{
         $tri_est=$tribunal->consultar_tribunal_estado($data[1]);
         $tri_est[0]="<option selected value=$data[1]>$tri_est[0]</option>";

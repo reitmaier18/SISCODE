@@ -104,10 +104,9 @@
 
         function consultar_pieza($expediente){
             $exp=$this->consultar_expediente($expediente);
-            $sql = ("select numero_pieza, ubicacion from sisco.pieza inner join sisco.ubicacion on ubicacion_id=sisco.ubicacion.id where expediente_id = '$exp[1]'");
+            $sql = ("select numero_pieza, ubicacion from sisco.pieza inner join sisco.ubicacion on ubicacion_id=sisco.ubicacion.id where expediente_id = '$exp[1]' order by numero_pieza asc");
             $query = pg_query($sql);
-            $fila=pg_fetch_row($query);
-            //return var_dump($fila);
+            $fila=pg_fetch_all($query);
             return $fila;
         }
     }

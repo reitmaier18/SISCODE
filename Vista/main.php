@@ -104,26 +104,26 @@
                                 <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="text" name="nombre" id="a" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="a" data-error="wrong" data-success="right">Nombre del funcionario</label>                            
+                                    <label for="a">Nombre del funcionario</label>                            
                                 </div>
                                 <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="text" name="apellido" id="b" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="b" data-error="wrong" data-success="right">Apellido del funcionario</label>                            
+                                    <label for="b">Apellido del funcionario</label>                            
                                 </div>
                             </div>
                             <div class="input-group">
                                 <div class="md-form col-md-2 offset-md-1 ">
                                     <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="nac">
-                                        <option disabled selected>Nac</option>
-                                        <option value="1">V-</option>
+                                        <option disabled>Nac</option>
+                                        <option value="1" selected>V-</option>
                                         <option value="2">E-</option>
                                     </select>
                                 </div> 
                                 <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="text" name="ci" id="c" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="c" data-error="wrong" data-success="right">Cedula del funcionario</label>                            
+                                    <label for="c">Cedula del funcionario</label>                            
                                 </div>
                                 <div class="md-form col-md-4">
                                     <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="rol">
@@ -140,12 +140,12 @@
                                 <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="text" name="usuario" id="d" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="d" data-error="wrong" data-success="right">Usuario del funcionario</label>                            
+                                    <label for="d">Usuario del funcionario</label>                            
                                 </div>
                                 <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="password" name="password" id="f" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="f" data-error="wrong" data-success="right">Password del funcionario</label>                            
+                                    <label for="f">Password del funcionario</label>                            
                                 </div>
                             </div>
                             <div class="input-group">
@@ -167,21 +167,21 @@
                             <div class="input-group">
                                 <div class="md-form col-md-2 offset-md-3">
                                     <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="nac">
-                                        <option disabled selected>Nac</option>
-                                        <option value="1">V-</option>
+                                        <option disabled>Nac</option>
+                                        <option value="1" selected>V-</option>
                                         <option value="2">E-</option>
                                     </select>
                                 </div>
                                 <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                                     <!--img src="img/icon2.png" class="prefix"-->
                                     <input type="text" name="ci" id="g" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="g" data-error="wrong" data-success="right">Cedula del funcionario</label>                            
+                                    <label for="g">Cedula del funcionario</label>                            
                                 </div>
                                  
                             </div>
                             <div class="input-group">
                                 <div class="md-form col-md-2 offset-md-3">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" onclick="enviar_form_act_user();"> SIGUIENTE </button>    
+                                    <button type="button" class="btn btn-primary" onclick="enviar_form_act_user();"> SIGUIENTE </button>    
                                 </div> 
                                 <div class="md-form col-md-2 offset-md-1 ">
                                     <input type="reset" class="btn btn-danger" value="Cancelar">
@@ -201,8 +201,8 @@
                                 </div>
                                 <div class="md-form col-md-2">
                                     <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="nac">
-                                        <option disabled selected>Nac</option>
-                                        <option value="1">V-</option>
+                                        <option disabled>Nac</option>
+                                        <option value="1" selected>V-</option>
                                         <option value="2">E-</option>
                                     </select>
                                 </div>
@@ -304,14 +304,14 @@
                             <div class="md-form">
                                 <i class="prefix" onclick="enviar_form_consul_expe();"><img src="img/icon6.png"></i>
                                 <label for="search">Buscar...</label>
-                                <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
                             </div>
                         </div>
                         <!--a>rgba(136, 133, 133, 1)</a-->
                         <hr>
                         <div">
                             <table class="table table-bordered">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
                                         <th>N° expediente</th>
@@ -492,15 +492,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <table>
-                <thead>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
                     <th>Número de pieza</th>
                     <th>Ubicación</th>
+                    <th>Acción</th>
                 </thead>
                 <tbody id="l_pieza">
                     
                 </tbody>
             </table>
+            <center><label class="btn btn-ligth"><img src='img/icon11.png' id='detail' onclick=''></label></center>
           </div>
           
         </div>

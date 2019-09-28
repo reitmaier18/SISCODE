@@ -6,11 +6,12 @@
     $db->_construct();
     $expediente = new expediente();
     $data = $expediente->consultar_pieza($_POST['value']);
-    //var_dump($data);
     for ($i=0; $i < count($data); $i++) { 
     	echo "<tr>";
-    	echo "<td>".$data[$i][0]."</td>";
-    	echo "<td>".$data[$i][1]."</td>";
+    	echo "<td>".$data[$i]['numero_pieza']."</td>";
+    	echo "<td>".$data[$i]['ubicacion']."</td>";
+        echo "<td><center><img src='img/icon7.png' id='edit' onclick=''></center></td>";
     	echo "</tr>";
     }
+    
 ?>

@@ -133,39 +133,40 @@ function enviar_form_reg_user() {
 */
 function enviar_form_act_user() {
     var dato = $('#form_actua_user').serialize();
+    //validarr que el campo cedula no este vacio//////////URGENTE
+    var cedula = document.getElementById('g').value;
+    if (cedula=='') {
+        $("#mensaje").modal("show");
+        $("#mensaje_text").html('Ingrese cedula');
+    }
     //alert(dato);
     $.ajax({
         url:'./../Controlador/buscar_usuario_contrl.php',
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-        //alert(respuesta);
         if (respuesta==0) {
             $("#mensaje").modal("show");
-            //$("#mensaje_text").html('Usuario no registrado');
-            $("#mensaje_text").html(respuesta);
-            //window.location="main.php";
-        }if(respuesta!=0){
+            $("#mensaje_text").html('Usuario no registrado');
+            //$("#mensaje_text").html(respuesta);
+        }else{
             var datos = eval(respuesta);
-            //alert(dato);
-            
             for (i =0; i < datos.length; i++) {
-                        
-                        dat=datos[i][0]+"*"+datos[i][1]+"*"+datos[i][2]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][4]+"*"+datos[i][5]+"*"+datos[i][6];
-                        var d = dat.split("*");
-                            $("#u_a_nombre").val(datos[0]);
-                            $("#u_a_apellido").val(datos[1]);
-                            $("#u_a_nac").val(datos[2]);
-                            $("#u_a_ci").val(datos[3]);
-                            $("#u_a_rol").val(datos[4]);
-                            $("#u_a_usuario").val(datos[5]);
-                            $("#u_a_password").val(datos[6]);
-                            $("#u_a_estatus").val(datos[7]);
-                            $("#valor_oculto").val(datos[8]);
-                            //alert(d);
-
-                        }    
-            }
+                dat=datos[i][0]+"*"+datos[i][1]+"*"+datos[i][2]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][4]+"*"+datos[i][5]+"*"+datos[i][6];
+                var d = dat.split("*");
+                $("#u_a_nombre").val(datos[0]);
+                $("#u_a_apellido").val(datos[1]);
+                $("#u_a_nac").val(datos[2]);
+                $("#u_a_ci").val(datos[3]);
+                $("#u_a_rol").val(datos[4]);
+                $("#u_a_usuario").val(datos[5]);
+                $("#u_a_password").val(datos[6]);
+                $("#u_a_estatus").val(datos[7]);
+                $("#valor_oculto").val(datos[8]);
+                //alert(d);
+                $('#basicExampleModal').modal("show");
+            }    
+        }
         
     });
 }
@@ -217,22 +218,30 @@ function enviar_form_regis_expe(){
 */
 function enviar_form_consul_expe(){
     var dato = document.getElementById('search').value;
-    //alert(dato);
-    $.ajax({
-        url:'./../Controlador/consultar_expediente_contrl.php',
-        type:'POST',
-        data: "value="+dato,
-    }).done(function(respuesta){
-        //alert(respuesta);
-        if (respuesta=='Este expediente no existe') {
-            $("#mensaje").modal("show");
-            $("#mensaje_text").html(respuesta);
+    if (dato=='') {
+        //alert();
+        $("#mensaje").modal("show");
+        $("#mensaje_text").html("Ingrese algun valor");
+        $('#tc').html('');
+    }else{
+        $.ajax({
+            url:'./../Controlador/consultar_expediente_contrl.php',
+            type:'POST',
+            data: "value="+dato,
+        }).done(function(respuesta){
             //alert(respuesta);
-        }else{
-            $('#tc').html(respuesta);
-            
-        }
-    });
+            if (respuesta=='Este expediente no existe') {
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html(respuesta);
+                $('#tc').html('');
+                //alert(respuesta);
+            }else{
+                $('#tc').html(respuesta);
+                
+            }
+        });    
+    }
+    
 }
 
 
@@ -312,6 +321,8 @@ function update_expe(){
     });
 }
 
+
+//funcion que mide el tiempo de inactividad de un usuario en el sistema para poder sacarlo del mismo, el intervalo de tiempo es de 10min
 var tiempo = 0;
 
 window.onload=function(){
