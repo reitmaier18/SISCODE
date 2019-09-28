@@ -68,7 +68,7 @@ function listar_tribunales_update(){
         type:'POST',
         data: "envio= "+dato,
     }).done(function(respuesta){
-        $('#tribunal_update select').html(respuesta).fadeIn();           
+        $('#tribunal_update').html(respuesta).fadeIn();           
     });
 }
 
@@ -82,7 +82,7 @@ function añadir_tribunales(){
     }).done(function(respuesta){
         alert(respuesta);
         //alert(r);
-        window.location="main.php";      
+        window.location.reload();    
     });
 }
 
@@ -123,7 +123,7 @@ function enviar_form_reg_user() {
         var r = eval(respuesta);
         //alert(respuesta);
         alert(r);
-        window.location="main.php";       
+        window.location.reload();      
     });
 
 }
@@ -141,29 +141,39 @@ function enviar_form_act_user() {
     }).done(function(respuesta){
         //alert(respuesta);
         if (respuesta==0) {
-            alert('Usuario no registrado');
-            window.location="main.php";
-        }
-        var datos = eval(respuesta);
-        //alert(dato);
-        
-        for (i =0; i < datos.length; i++) {
-                    
-                    dat=datos[i][0]+"*"+datos[i][1]+"*"+datos[i][2]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][4]+"*"+datos[i][5]+"*"+datos[i][6];
-                    var d = dat.split("*");
-                        $("#u_a_nombre").val(datos[0]);
-                        $("#u_a_apellido").val(datos[1]);
-                        $("#u_a_nac").val(datos[2]);
-                        $("#u_a_ci").val(datos[3]);
-                        $("#u_a_rol").val(datos[4]);
-                        $("#u_a_usuario").val(datos[5]);
-                        $("#u_a_password").val(datos[6]);
-                        $("#u_a_estatus").val(datos[7]);
-                        $("#valor_oculto").val(datos[8]);
-                        //alert(d);
+            $("#mensaje").modal("show");
+            //$("#mensaje_text").html('Usuario no registrado');
+            $("#mensaje_text").html(respuesta);
+            //window.location="main.php";
+        }if(respuesta!=0){
+            var datos = eval(respuesta);
+            //alert(dato);
+            
+            for (i =0; i < datos.length; i++) {
+                        
+                        dat=datos[i][0]+"*"+datos[i][1]+"*"+datos[i][2]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][3]+"*"+datos[i][4]+"*"+datos[i][5]+"*"+datos[i][6];
+                        var d = dat.split("*");
+                            $("#u_a_nombre").val(datos[0]);
+                            $("#u_a_apellido").val(datos[1]);
+                            $("#u_a_nac").val(datos[2]);
+                            $("#u_a_ci").val(datos[3]);
+                            $("#u_a_rol").val(datos[4]);
+                            $("#u_a_usuario").val(datos[5]);
+                            $("#u_a_password").val(datos[6]);
+                            $("#u_a_estatus").val(datos[7]);
+                            $("#valor_oculto").val(datos[8]);
+                            //alert(d);
 
-                    }
+                        }    
+            }
+        
     });
+}
+
+function question(){
+    
+    $("#mensaje").modal("show");
+    $("#mensaje_text").html(document.getElementById('question').value);
 }
 
 /*
@@ -180,8 +190,10 @@ function enviar_form_act_user_final() {
     }).done(function(respuesta){
         //alert(respuesta);
         var datos = eval(respuesta);
-        alert(datos);
-        window.location="main.php"; 
+        $("#mensaje").modal("show");
+        $("#mensaje_text").html(datos);
+        
+        //window.location="main.php"; 
     });
 }
 
@@ -194,8 +206,8 @@ function enviar_form_regis_expe(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-        //alert(respuesta);
-        var datos = eval(respuesta);
+        alert(respuesta);
+        //var datos = eval(respuesta);
         
     });
 }
@@ -203,31 +215,125 @@ function enviar_form_regis_expe(){
 /*
 * función para enviar datos del expediente para ser actualizados
 */
-function enviar_form_act_expe(){
-    var dato = $('#form_act_expe').serialize();
+function enviar_form_consul_expe(){
+    var dato = document.getElementById('search').value;
+    //alert(dato);
     $.ajax({
         url:'./../Controlador/consultar_expediente_contrl.php',
         type:'POST',
-        data: dato,
+        data: "value="+dato,
     }).done(function(respuesta){
         //alert(respuesta);
         if (respuesta=='Este expediente no existe') {
-            alert(respuesta);
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html(respuesta);
+            //alert(respuesta);
         }else{
-            var datos = eval(respuesta);
-            //alert (datos['nombre']);    
-            //alert(datos[1]);
-            $("#numero_expe_update").val(datos[0]);
-            $("#nac_expe_update").val(datos[5]);
-            $("#ci_proc_expe_update").val(datos[6]);
-            $("#nombre_proc_expe_update").val(datos[3]);
-            $("#apellido_proc_expe_update").val(datos[4]);
-            $("#estado_update").val(datos[2]);
-            $('#tribunal_update select').html(datos[1]).fadeIn();
+            $('#tc').html(respuesta);
+            
         }
-        
-        
-        
-        //window.location="main.php";*/
     });
 }
+
+
+//en construcción///////////////////////////////////////////////////////
+function auto_complete_expediente(){
+  var dato = document.getElementById('search').value;
+  var dat;
+  $.ajax({
+    url:'Accounting_entries/autocomplete',
+    type:'GET',
+    data: 'id='+dato,
+  }).done(function(respuesta){
+    var datos = eval(respuesta);
+    var a = new Array();
+      $("#assistant").autocomplete({
+          source: a
+    });
+    
+  });
+}
+
+function list_pieza(){
+ var dato = document.getElementById('search').value;
+    //alert(dato);
+    $.ajax({
+        url:'./../Controlador/list_pieza_contrl.php',
+        type:'POST',
+        data: "value="+dato,
+    }).done(function(respuesta){
+        $('#pieza_list').modal('show');
+        $('#l_pieza').html(respuesta);
+        //alert(respuesta);
+        
+    });   
+}
+
+function update_form_expe(){
+    $("table tbody tr").click(function() {
+        var dato = $(this).find("td:eq(1)").text();
+        //alert(dato);
+        $.ajax({
+            url:'./../Controlador/consultar_expediente_act_contrl.php',
+            type:'POST',
+            data: "value="+dato,
+        }).done(function(respuesta){
+            var datos = eval(respuesta);
+            $("#numero_expe_update").val(datos[0]);
+            $("#tribunal_update").html(datos[1]);
+            $("#estado_update").val(datos[2]);
+            $("#apellido_proc_expe_update").val(datos[4]);
+            $("#nombre_proc_expe_update").val(datos[3]);
+            $("#ci_proc_expe_update").val(datos[6]);
+            $("#nac_expe_update").val(datos[5]);
+            $("#val_oculto").val(datos[7]);
+        });       
+    });
+}
+
+
+
+
+
+function notificacion(){
+    $("#notificacion").modal("show");
+    
+}
+
+function update_expe(){
+    var dato = $('#form_actualizar_expediente').serialize();
+    $.ajax({
+        url:'./../Controlador/update_expe.contrl.php',
+        type:'POST',
+        data: dato,
+    }).done(function(respuesta){
+       window.location.reload();
+
+    });
+}
+
+var tiempo = 0;
+
+window.onload=function(){
+    
+    var intervalo_tiempo = setInterval(incremento_tiempo, 60000); // 1 minute
+
+    //alert("hola aqui esta el temporizador");
+    $(this).mousemove(function (e) { 
+     tiempo = 0; 
+    }); 
+    $(this).keypress(function (e) { 
+     tiempo = 0; 
+    }); 
+
+}
+function incremento_tiempo() { 
+    tiempo = tiempo + 1; 
+    console.log(tiempo);
+    if (tiempo > 10) { // 20 minutes 
+        window.location="../Controlador/cerrar_session_contrl.php"; 
+    } 
+}
+
+
+

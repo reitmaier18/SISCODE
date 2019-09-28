@@ -52,9 +52,7 @@
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
                             <a class="dropdown-item" onclick="mostrar_mod_expediente_a();">Registrar expediente</a>
                             <a class="dropdown-item" onclick="mostrar_mod_expediente_b();">Actualizar expediente</a>
-                            <a class="dropdown-item" onclick="#">Registrar expediente asociado</a>
-                                                        
-                            <a class="dropdown-item" onclick="mostrar_mod_expediente_c();">Inventario de expediente</a>
+                            
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -93,13 +91,13 @@
     <section class="my-5 inicio">
         <div class="container">
             <div class="row">
-                <div class="col-md-2"></div>
-                    <div class="col-md-8" id="inicio">
-                        <h2 class="h2-responsive font-weight-bold text-center my-5">¡Bienvenido! </h2><br> <p id="prueba" class="h2-responsive font-weight-bold text-center my-5"><?php echo $_SESSION['nombre']." ".$_SESSION['apellido']; ?> </p><br><h2 class="h2-responsive font-weight-bold text-center my-5"> Sistema de Control y Distribución de Expedientes</h2>
-                        
+                <div class="col-md-1"></div>
+                    <div class="col-md-10" id="inicio">
+                        <h2 class="h2-responsive font-weight-bold text-center my-5"> Sistema de Control y Distribución de Expedientes</h2>
+                        <h2 class="h2-responsive font-weight-bold text-center my-5">¡Bienvenido! <?php echo $_SESSION['nombre']." ".$_SESSION['apellido']; ?></h2>                        
                     </div>
                     <!--Formularios del usuario -->
-                    <div class="col-md-8" id="user_a">
+                    <div class="col-md-10" id="user_a">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Registrar Usuario</h2>
                         <form  class="col-md-12" id="form_reg_user">
                             <div class="input-group">
@@ -162,7 +160,7 @@
                         <p class="text-center"></p>
                     </div>
                     <!--2 Formularios del usuario -->
-                    <div class="col-md-8" id="user_b">
+                    <div class="col-md-10" id="user_b">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Actualizar Usuario</h2>
                         <p class="text-center">Por favor indique el numero de cedula del usuario que desea actualizar</p>
                         <form action="#" method="post" class="col-md-12" id="form_actua_user">
@@ -192,7 +190,7 @@
                         </form>                        
                     </div>
                     <!--Formularios del Expediente -->
-                    <div class="col-md-8" id="expediente_a">
+                    <div class="col-md-10" id="expediente_a">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Registrar expediente</h2>
                         <form id="form_regis_expe" class="col-md-12">
                             <div class="input-group">
@@ -282,6 +280,12 @@
                                 <div class="md-form text-center">
                                     <input type="button" class="btn btn-blue-grey text-center" id="btn-oculto" value="+" title="Añadir tribunal" data-toggle="modal" data-target="#añadir-tribunal">    
                                 </div>
+                            </div>
+                            <div class="input-group text-center">
+                                <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" id="question" onclick="question();">
+                                  <label class="custom-control-label" for="question">Expediente asociado</label>
+                                </div>
                             </div>                            
                             <div class="input-group">
                                 <div class="md-form col-md-2 offset-md-3">
@@ -294,41 +298,58 @@
                         </form>                        
                     </div>
                     <!--2 Formularios del Expediente -->
-                    <div class="col-md-8" id="expediente_b">
+                    <div class="col-md-10" id="expediente_b">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Actualizar expediente</h2>
-                        <form id="form_act_expe" method="post" class="col-md-12">
-                            <div class="input-group text-center">
-                                <div class="md-form textbox col-md-4 offset-md-4 text-center" id="textbox1">
-                                    <!--img src="img/icon2.png" class="prefix"-->
-                                    <input type="text" name="expediente_actualizar" id="m" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                                    <label for="m" data-error="wrong" data-success="right">Numero del expediente</label>                            
-                                </div>                                
+                        <div class="col-md-4">
+                            <div class="md-form">
+                                <i class="prefix" onclick="enviar_form_consul_expe();"><img src="img/icon6.png"></i>
+                                <label for="search">Buscar...</label>
+                                <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
                             </div>
-                            <div class="input-group">
-                                <div class="md-form col-md-2 offset-md-3">
-                                    <input type="button" class="btn btn-primary" value="Siguiente" onclick="enviar_form_act_expe();" data-toggle="modal" data-target="#actualizar_expediente">    
-                                </div> 
-                                <div class="md-form col-md-2 offset-md-1 ">
-                                    <input type="reset" class="btn btn-danger" value="Cancelar">
-                                </div> 
-                            </div>
-                        </form>                        
+                        </div>
+                        <!--a>rgba(136, 133, 133, 1)</a-->
+                        <hr>
+                        <div">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>N° expediente</th>
+                                        <th>Cedula</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Tribunal</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tc">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!--3 Formularios del Expediente -->
-                    <div class="col-md-8" id="expediente_c">
-                        <h2 class="h2-responsive font-weight-bold text-center my-5">Listado de expedientes</h2>
-                        <form class="col-md-12">
-                            <div class="input-group">
-                                <div class="md-form col-md-2 offset-md-3" id="prueba">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" >
-                                        <option disabled selected>Nac</option>
-                                        <option value="1">V-</option>
-                                        <option value="2">E-</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-md-10" id="expediente_c">
+                        <h2 class="h2-responsive font-weight-bold text-center my-5">Plan de cuentas</h2>
+                        <table class="table" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>botones</th>
+                                <th>codigo</th>
+                                <th>descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tcuerpo">
+                            <tr>
+                                <td><button class="btn btn-primary" onclick="anadir_fila();" id="bt">+</button></td>    
+                                <td id="codigo">1</td>
+                                <td>Activo</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <!--button class="btn btn-primary" onclick="anadir_fila();">Ejecutar prueba</button-->
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -424,6 +445,68 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="mensaje_text"></p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade right" id="notificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+      <div class="modal-dialog modal-sm modal-side modal-top-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notificacion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!--Modal para listar piezas-->
+    <div class="modal fade" id="pieza_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Listado de piezas del expediente <label id="expediente_pieza"></label></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table>
+                <thead>
+                    <th>Número de pieza</th>
+                    <th>Ubicación</th>
+                </thead>
+                <tbody id="l_pieza">
+                    
+                </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
     <!-- Modal para añadir tribunales -->
     <div class="modal fade" id="añadir-tribunal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="false">
@@ -505,7 +588,11 @@
                                     <input type="text" name="numero_expe" id="numero_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                                 </div>
                             
-                                
+                                <div class="textbox col-md-4 offset-md-1" id="oculto">
+                                    <label for="numero_expe_update">Numero del expediente</label>                            
+                                    <input type="text" name="id" id="val_oculto" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                </div>
+
                                 <div class="md-form textbox col-md-2">
                                     <select class="browser-default custom-select custom-select-md btn-blue-grey" name="nac" id="nac_expe_update">
                                         <option disabled selected>Nac</option>
@@ -530,7 +617,7 @@
                             </div>
                             <div class="input-group">
                                 <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update">
+                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update" name="estado">
                                         <option disabled selected>Estado</option>
                                         <option value="1">Amazonas</option>
                                         <option value="2">Anzoátegui</option>
@@ -560,8 +647,8 @@
                                 </div>                                
                             </div>
                             <div class="input-group">
-                                <div class="md-form col-md-10 offset-md-1" id="tribunal_update">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="tribunal">                                        
+                                <div class="md-form col-md-10 offset-md-1">
+                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="tribunal" id="tribunal_update">                                        
                                     </select>                            
                                 </div>
                             </div>
@@ -571,11 +658,8 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <div class="col-md-2 offset-md-3">
-                                    <input type="button" class="btn btn-primary" onclick="#" value="Registrar">    
-                                </div> 
-                                <div class="col-md-2 offset-md-1 ">
-                                    <input type="reset" class="btn btn-danger" value="Cancelar">
+                                <div class="col-md-2 offset-md-1">
+                                    <input type="button" class="btn btn-primary" onclick="update_expe();" value="Actualizar">    
                                 </div> 
                             </div>
                 </form>
@@ -585,6 +669,9 @@
     </div>
     
 
+
+
+    
     </section>
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -806,6 +893,8 @@
                             </div>
                         </form>                        
                     </div>
+
+
                 </div>
             </div>
         </div>

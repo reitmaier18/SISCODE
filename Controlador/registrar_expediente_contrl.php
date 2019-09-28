@@ -12,5 +12,6 @@
         echo "Hubo un error al consultar o registrar procesado";
     }else{
         $regis_expe = $expediente->registrar_expediente($_POST['numero_expe'], $dato_procesado, $_POST['tribunal'], $_POST['ubicacion']);
+        echo $regis_expe;
     }
 ?>

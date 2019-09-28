@@ -32,3 +32,12 @@ create table sisco.solicitud_externa_pieza_asociada (id serial not null, fecha d
 
 create table sisco.solicitud_externa_pieza (id serial not null, fecha date, solicitante_id integer not null, pieza_id integer not null, constraint id_solicitud_externa primary key(id), constraint solicitante_fk foreign key(solicitante_id) references sisco.solicitante_externo(id), constraint pieza_fk foreign key(pieza_id) references sisco.pieza(id));
 
+
+
+
+
+
+Para mysql 
+los ptos foreign key son asiiiii (ALTER TABLE `grupo` ADD FOREIGN KEY (`elemento_fk`) REFERENCES `elemento`(`id_elemento`) ON DELETE RESTRICT ON UPDATE RESTRICT;)
+
+los ptos inner join son asiiii (ALTER TABLE `grupo` ADD FOREIGN KEY (`elemento_fk`) REFERENCES `elemento`(`id_elemento`) ON DELETE RESTRICT ON UPDATE RESTRICT;)

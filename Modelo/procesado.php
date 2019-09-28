@@ -32,6 +32,16 @@
                 return $verifico[0];
             }
         }
+
+        function update_procesado($nombre, $apellido, $nac, $ci, $id){
+            $sql = "update sisco.procesado set nombre_acusado = '$nombre',  apellido_acusado = '$apellido', nacionalidad = '$nac', cedula_acusado = '$ci' where id = '$id'";
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 'False';
+            }else{
+                return 'True';
+            }
+        }
         
     }
     

@@ -22,7 +22,7 @@
         }
 
         function consul_tribunal_procesado_update($id){
-            $sql = ("select procesado_id, tribunal_id where id = '$id'");
+            $sql = ("select procesado_id, sisco.tribunal_procesado.id from sisco.tribunal_procesado inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id where sisco.expediente.id='$id'");
             $query = pg_query($sql);
             $fila=pg_fetch_array($query, 0, PGSQL_NUM);
             return $fila;
@@ -32,6 +32,16 @@
             $sql = ("insert into sisco.tribunal_procesado (procesado_id, tribunal_id) values ('$procesado','$tribunal')");
             $query = pg_query($sql);
             
+        }
+
+        function update_tribunal_procesado($id, $tribunal){
+            $sql = "update sisco.tribunal_procesado set tribunal_id = '$tribunal' where id = '$id'";
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 'False';
+            }else{
+                return 'True';
+            }
         }
         
         function registrar_expediente($expediente, $procesado, $tribunal, $ubicacion){
@@ -61,22 +71,44 @@
                         echo "Error al registrar expediente";
                     }else{
                         $exp=$this->consultar_expediente($expediente);
-                        $sql = ("insert into sisco.pieza (expediente_id, ubicacion_id, numero_pieza) values ('$expediente', '$ubicacion', 1)");
+                        $sql = ("insert into sisco.pieza (expediente_id, ubicacion_id, numero_pieza) values ('$exp[1]', '$ubicacion', 1)");
                         $query = pg_query($sql);
-                        echo "Se registro el expediente";
+                        return "Se registro el expediente";
+                        
                     }
                 }
             }
 
         }
+
         function consultar_datos_expediente($expediente){
             $exp=$this->consultar_expediente($expediente);
             if ($exp[0] == $expediente) {
-                $tri_pro = $this->consul_tribunal_procesado_update($exp[2]);
+                $tri_pro = $this->consul_tribunal_procesado_update($exp[1]);
                 return $tri_pro;
             }else{
                 return 'Este expediente no existe';
             }
+            //var_dump($expediente);
+        }
+
+        function update_expe($id, $expe){
+            $sql = "update sisco.expediente set numero_expediente = '$expe' where id = '$id'";
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 'False';
+            }else{
+                return 'True';
+            }
+        }
+
+        function consultar_pieza($expediente){
+            $exp=$this->consultar_expediente($expediente);
+            $sql = ("select numero_pieza, ubicacion from sisco.pieza inner join sisco.ubicacion on ubicacion_id=sisco.ubicacion.id where expediente_id = '$exp[1]'");
+            $query = pg_query($sql);
+            $fila=pg_fetch_row($query);
+            //return var_dump($fila);
+            return $fila;
         }
     }
     
