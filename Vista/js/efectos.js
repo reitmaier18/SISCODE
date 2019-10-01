@@ -82,7 +82,7 @@ function añadir_tribunales(){
     }).done(function(respuesta){
         alert(respuesta);
         //alert(r);
-        window.location.reload();    
+        //window.location.reload();    
     });
 }
 
@@ -193,7 +193,7 @@ function enviar_form_act_user_final() {
         var datos = eval(respuesta);
         $("#mensaje").modal("show");
         $("#mensaje_text").html(datos);
-        
+        $('#form_actua_user_final')[0].reset();
         //window.location="main.php"; 
     });
 }
@@ -209,7 +209,7 @@ function enviar_form_regis_expe(){
     }).done(function(respuesta){
         alert(respuesta);
         //var datos = eval(respuesta);
-        
+        $('#form_regis_expe')[0].reset();
     });
 }
 
@@ -272,10 +272,23 @@ function list_pieza(){
         data: "value="+dato,
     }).done(function(respuesta){
         $('#pieza_list').modal('show');
+        $('#table-pieza').show();
+        $('#form-pieza').hide();
         $('#l_pieza').html(respuesta);
         //alert(respuesta);
         
     });   
+}
+
+function update_pieza(){
+    alert("En construcción");
+}
+
+function añadir_pieza(){
+    alert("En construcción");
+    var dato = document.getElementById('search').value;
+    $('#table-pieza').hide();
+    $('#form-pieza').show();
 }
 
 function update_form_expe(){
@@ -288,6 +301,7 @@ function update_form_expe(){
             data: "value="+dato,
         }).done(function(respuesta){
             var datos = eval(respuesta);
+            console.log(datos);
             $("#numero_expe_update").val(datos[0]);
             $("#tribunal_update").html(datos[1]);
             $("#estado_update").val(datos[2]);
@@ -300,10 +314,6 @@ function update_form_expe(){
     });
 }
 
-
-
-
-
 function notificacion(){
     $("#notificacion").modal("show");
     
@@ -312,12 +322,14 @@ function notificacion(){
 function update_expe(){
     var dato = $('#form_actualizar_expediente').serialize();
     $.ajax({
-        url:'./../Controlador/update_expe.contrl.php',
+        url:'./../Controlador/update_expe_contrl.php',
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-       window.location.reload();
-
+       $("#actualizar_expediente").modal("hide");
+       $("#mensaje").modal("show");
+       $("#mensaje_text").html("Expediente actualizado");
+       enviar_form_consul_expe();
     });
 }
 

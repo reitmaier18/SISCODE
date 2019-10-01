@@ -226,7 +226,7 @@
                             </div>
                             <div class="input-group">
                                 <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales();" id="estado">
+                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onchange="listar_tribunales();" id="estado">
                                         <option disabled selected>Estado</option>
                                         <option value="1">Amazonas</option>
                                         <option value="2">Anzoátegui</option>
@@ -492,7 +492,8 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-bordered">
+            <div id="table-pieza">
+                <table class="table table-bordered">
                 <thead class="thead-dark">
                     <th>Número de pieza</th>
                     <th>Ubicación</th>
@@ -502,7 +503,32 @@
                     
                 </tbody>
             </table>
-            <center><label class="btn btn-ligth"><img src='img/icon11.png' id='detail' onclick=''></label></center>
+            <center><label class="btn btn-ligth" onclick='añadir_pieza();'><img src='img/icon11.png' id='detail'></label></center>    
+            </div>
+
+            <div id="form-pieza" class="oc">
+                <div class="input-group">
+                    <select class="custom-select btn-blue-grey" name="ubicacion">
+                        <option disabled selected>Ubicación</option>
+                        <option value="1">Tribunal 1</option>
+                        <option value="2">Tribunal 2</option>
+                        <option value="3">Tribunal 3</option>
+                        <option value="4">Corte 1</option>
+                        <option value="5">Corte 2</option>
+                        <option value="6">Corte 3</option>
+                        <option value="7">Sustanciacion</option>
+                        <option value="8">Secretaria del tribunal</option>
+                        <option value="9">Secretaria de la corte</option>
+                        <option value="10">Archivo</option>
+                    </select>
+                    
+                                                
+                </div>
+                <center><button class="btn btn-primary" type="button">Aceptar</button></center>
+                       
+                
+            </div>
+            
           </div>
           
         </div>
