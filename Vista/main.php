@@ -18,6 +18,7 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
     
+    
         
     <script>
         
@@ -55,14 +56,9 @@
                             
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SOLICITUDES </a>
-                        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" href="#">Solicitar expediente</a>
-                            <a class="dropdown-item" href="#">Consultar solicitud</a>
-                            <a class="dropdown-item" href="#">Tramitar solicitud</a>
-                        </div>
-                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="mostrar_mod_solicitud_list();">SOLICITUDES <span class="sr-only"></span></a>
+                    </li>                    
                     <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REPORTES </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
@@ -327,28 +323,58 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!-- Listado de solicitudes -->
+                        <div class="col-md-10" id="solicitud_list">
+                            <h2 class="h2-responsive font-weight-bold text-center my-5">Listado de solicitudes</h2>
+                            <div class="col-md-4">
+                                <div class="md-form">
+                                    <i class="prefix"data-toggle='modal' data-target='#solicitud_modal'><img src="img/icon6.png"></i>
+                                    <label for="search">Buscar...</label>
+                                    <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+                                </div>
+                            </div>
+                            <div>
+                                <hr>
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <th>#</th>
+                                        <th>Fecha</th>
+                                        <th>Solicitante</th>
+                                        <th>Tipo de solicitud</th>
+                                        <th>Expediente</th>
+                                        <th>Pieza</th>
+                                        <th>Acción</th>
+                                    </thead>
+                                    <tbody class="list_solicitud">
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                          <td colspan="100">
+                                            <div class="text-right">
+                                              <div class="input-append input-append">
+                                                <div class="btn-group" role="group" aria-label="...">
+                                                  <button class="btn btn-blue-grey btn-next" type="button" onclick="mostrar_pre();"></button>
+                                                  <div class="btn-group" role="group">
+                                                    <select name="p" id="act" class="form-control" onchange="get_list_chart_account();">
+                                                       <option value="1">1</option>
+                                                    </select>
+                                                    </div>
+                                                  <button class="btn btn-blue-grey btn-back" type="button" onclick="mostrar_nex();"></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <center><button class="btn btn-primary" onclick="solicitud_modal();">Solicitar</button></center>
+                            <br>
+                        </div>
+
+                        <!--Hasta aqui llega el container-->
                     </div>
-                    <!--3 Formularios del Expediente -->
-                    <div class="col-md-10" id="expediente_c">
-                        <h2 class="h2-responsive font-weight-bold text-center my-5">Plan de cuentas</h2>
-                        <table class="table" id="tabla">
-                        <thead>
-                            <tr>
-                                <th>botones</th>
-                                <th>codigo</th>
-                                <th>descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tcuerpo">
-                            <tr>
-                                <td><button class="btn btn-primary" onclick="anadir_fila();" id="bt">+</button></td>    
-                                <td id="codigo">1</td>
-                                <td>Activo</td>
-                            </tr>
-                        </tbody>
-                        </table>
-                        <!--button class="btn btn-primary" onclick="anadir_fila();">Ejecutar prueba</button-->
-                    </div>
+                    
                     
                 </div>
             </div>
@@ -483,7 +509,7 @@
 
     <!--Modal para listar piezas-->
     <div class="modal fade" id="pieza_list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Listado de piezas del expediente <label id="expediente_pieza"></label></h5>
@@ -503,12 +529,13 @@
                     
                 </tbody>
             </table>
-            <center><label class="btn btn-ligth" onclick='añadir_pieza();'><img src='img/icon11.png' id='detail'></label></center>    
+            <center><label class="btn btn-ligth" onclick='modal_pieza();'><img src='img/icon11.png' id='detail'></label></center>    
             </div>
 
             <div id="form-pieza" class="oc">
+                <div class="oc"><input type="text" id="num_pieza"></div>
                 <div class="input-group">
-                    <select class="custom-select btn-blue-grey" name="ubicacion">
+                    <select class="custom-select btn-blue-grey" name="ubicacion" id="ubicacion_pieza">
                         <option disabled selected>Ubicación</option>
                         <option value="1">Tribunal 1</option>
                         <option value="2">Tribunal 2</option>
@@ -524,7 +551,12 @@
                     
                                                 
                 </div>
-                <center><button class="btn btn-primary" type="button">Aceptar</button></center>
+                <div id="btn_a">
+                    <center><button class="btn btn-primary" type="button" onclick="añadir_pieza();">Aceptar</button></center>
+                </div>
+                <div id="btn_b" class="oc">
+                    <center><button class="btn btn-primary" type="button" onclick="update_pieza();">Actualizar</button></center>
+                </div>
                        
                 
             </div>
@@ -695,7 +727,132 @@
         
         </div>
     </div>
-    
+    </div>
+        <!-- Modal para realizar una solicitud -->
+    <div class="modal fade" id="solicitud_modal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Formulario de solicitud de expedientes y piezas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" onclick="display_form_sol_int();" 
+                      aria-selected="true">Solicitud interna</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" aria-selected="false" onclick="display_form_sol_ext();">Solicitud externa</a>
+                  </li>
+                </ul>
+                <form class="col-md-12" id="form_sol_interna">
+                    <br>
+                    <div class="input-group">
+                        <div class="md-form offset-md-1">
+                            <i class="prefix"data-toggle='modal' onclick="display_expe_list();"><img src="img/icon14.png"></i>
+                            <label for="sol_int_expe">Expediente</label>
+                            <input type="text" name="expediente" id="sol_int_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+                        </div>
+                        <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
+                            <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update" name="estado">
+                                <option disabled selected>Pieza</option>
+                            </select>                            
+                        </div>                                
+                        
+                    </div>
+
+                    <center><button class="btn btn-primary">interna</button></center>
+                </form>
+                <form class="col-md-12 oc" id="form_sol_externa">
+                    <br>
+                    
+                    <div class="input-group">
+                        <div class="md-form col-md-2 offset-md-3">
+                                <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="nac">
+                                    <option disabled>Nac</option>
+                                    <option value="1" selected>V-</option>
+                                    <option value="2">E-</option>
+                                </select>
+                            </div> 
+                            <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
+                                <!--img src="img/icon2.png" class="prefix"-->
+                                <input type="text" name="ci" id="c" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                <label for="c">Cedula del funcionario</label>                            
+                            </div>
+                        </div>
+
+                    <div class="input-group">
+                        <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
+                            <!--img src="img/icon2.png" class="prefix"-->
+                            <input type="text" name="nombre" id="a" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                            <label for="a">Nombre del funcionario</label>                            
+                        </div>
+                        <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
+                            <!--img src="img/icon2.png" class="prefix"-->
+                            <input type="text" name="apellido" id="b" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                            <label for="b">Apellido del funcionario</label>                            
+                        </div>
+                        
+                    </div>
+                    <div class="input-group">
+                        <div class="md-form offset-md-1">
+                            <i class="prefix"data-toggle='modal' data-target='' onclick="display_expe_list();"><img src="img/icon14.png"></i>
+                            <label for="sol_int_expe">Expediente</label>
+                            <input type="text" name="expediente" id="sol_int_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+                        </div>
+                        <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
+                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update" name="estado">
+                                        <option disabled selected>Pieza</option>
+                                    </select>                            
+                                </div>                                
+                        
+                    </div>
+                    <center><button class="btn btn-primary">externa</button></center>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal para listar los expedientes -->
+    <div class="modal fade" id="expediente_modal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Listado de expedientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>N° expediente</th>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Tribunal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="l_expediente">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    </div>
 
 
 
@@ -732,6 +889,7 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
     
         
     <script>

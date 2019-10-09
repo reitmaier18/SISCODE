@@ -85,6 +85,14 @@
             }
             //var_dump($expediente);
         }
+
+        function list_expediente(){
+            $sql= ("select numero_expediente, nacionalidad, cedula_acusado, nombre_acusado, apellido_acusado, estado_id, tribunal from sisco.tribunal_procesado inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id inner join sisco.tribunal on sisco.tribunal_procesado.tribunal_id = sisco.tribunal.id inner join sisco.procesado on sisco.tribunal_procesado.procesado_id = sisco.procesado.id order by numero_expediente");
+            $query=pg_query($sql);
+            $fila=pg_fetch_all($query);
+            return $fila;
+        }
+
         function update_expe($id, $expe){
             $sql = "update sisco.expediente set numero_expediente = '$expe' where id = '$id'";
             $query=pg_query($sql);
@@ -94,19 +102,43 @@
                 return 'True';
             }
         }
+
+        function consultar_estado($estado){
+            $sql=("select estado from sisco.estado where id='$estado'");
+            $query=pg_query($sql);
+            $fila=pg_fetch_array($query, 0, PGSQL_NUM);
+            return $fila;
+        }
+
         function consultar_pieza($expediente){
             $exp=$this->consultar_expediente($expediente);
-            $sql = ("select numero_pieza, ubicacion from sisco.pieza inner join sisco.ubicacion on ubicacion_id=sisco.ubicacion.id where expediente_id = '$exp[1]' order by numero_pieza asc");
+            $sql = ("select numero_pieza, ubicacion, sisco.ubicacion.id from sisco.pieza inner join sisco.ubicacion on ubicacion_id=sisco.ubicacion.id where expediente_id = '$exp[1]' order by numero_pieza asc");
             $query = pg_query($sql);
             $fila=pg_fetch_all($query);
             return $fila;
         }
+
         function añadir_pieza($expediente, $ubicacion){
+            $exp=$this->consultar_expediente($expediente);
             $data=$this->consultar_pieza($expediente);
             $pieza=count($data)+1;
-            $exp=$this->consultar_expediente($expediente);
             $sql = ("insert into sisco.pieza (expediente_id, ubicacion_id, numero_pieza) values ('$exp[1]', '$ubicacion', '$pieza')");
-            
+            $query = pg_query($sql);
+            $fila=pg_fetch_all($query);
+            return true;
+
+        }
+
+        function update_pieza($expediente, $pieza, $ubicacion){
+            $exp=$this->consultar_expediente($expediente);
+            //var_dump($exp);
+            $sql = ("update sisco.pieza set ubicacion_id = '$ubicacion' where expediente_id = '$exp[1]' and numero_pieza='$pieza'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 'False';
+            }else{
+                return 'True';
+            }   
         }
     }
     

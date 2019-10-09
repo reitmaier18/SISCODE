@@ -4,7 +4,7 @@ function mostrar_mod_user_a() {
     document.getElementById('user_b').style.display="none";
     document.getElementById('expediente_a').style.display="none";
     document.getElementById('expediente_b').style.display="none";
-    document.getElementById('expediente_c').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
     //alert("Modulo de registro de usuario");
     //document.getElementsByClassName('inicio').style.display="block";
 }
@@ -15,7 +15,7 @@ function mostrar_mod_user_b() {
     document.getElementById('user_a').style.display="none";
     document.getElementById('expediente_a').style.display="none";
     document.getElementById('expediente_b').style.display="none";
-    document.getElementById('expediente_c').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
     //alert("Modulo de actualización de usuario");
     //document.getElementsByClassName('inicio').style.display="block";
 }
@@ -27,7 +27,7 @@ function mostrar_mod_inicio() {
     document.getElementById('user_b').style.display="none";
     document.getElementById('expediente_a').style.display="none";
     document.getElementById('expediente_b').style.display="none";
-    document.getElementById('expediente_c').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
 }
 
@@ -37,7 +37,7 @@ function mostrar_mod_expediente_a() {
     document.getElementById('user_b').style.display="none";
     document.getElementById('expediente_a').style.display="block";
     document.getElementById('expediente_b').style.display="none";
-    document.getElementById('expediente_c').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
     /*$.ajax({
         url:'./../Controlador/listar_tribunales_contrl.php',
@@ -92,17 +92,17 @@ function mostrar_mod_expediente_b() {
     document.getElementById('user_b').style.display="none";
     document.getElementById('expediente_a').style.display="none";
     document.getElementById('expediente_b').style.display="block";
-    document.getElementById('expediente_c').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
 }
 
-function mostrar_mod_expediente_c() {
+function mostrar_mod_solicitud_list() {
     document.getElementById('inicio').style.display="none";
     document.getElementById('user_a').style.display="none";
     document.getElementById('user_b').style.display="none";
     document.getElementById('expediente_a').style.display="none";
     document.getElementById('expediente_b').style.display="none";
-    document.getElementById('expediente_c').style.display="block";
+    document.getElementById('solicitud_list').style.display="block";
     //document.getElementsByClassName('inicio').style.display="block";
    
     
@@ -280,15 +280,67 @@ function list_pieza(){
     });   
 }
 
+function update_pieza_modal(){
+    $("table tbody tr").click(function() {
+        var dato = document.getElementById('search').value;
+        var num = $(this).find("td:eq(0)").text();
+        var dat = $(this).find("td:eq(2)").text();
+        modal_pieza();//alert(dato);
+        document.getElementById('ubicacion_pieza').value=dat;
+        document.getElementById('num_pieza').value=num;
+        $('#btn_a').hide();
+        $('#btn_b').show();
+    });
+}
+
 function update_pieza(){
-    alert("En construcción");
+    var ubicacion = document.getElementById('ubicacion_pieza').value;
+    var dato = document.getElementById('num_pieza').value;
+    var dat = document.getElementById('search').value;
+    $.ajax({
+        url:'./../Controlador/update_pieza_contrl.php?num='+dato+'&expe='+dat,
+        type:'POST',
+        data: {value:ubicacion},
+    }).done(function(respuesta){
+        if (respuesta=='True') {
+            $('#pieza_list').modal('hide');
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html("Pieza actualizada, exitosamente");
+        }else{
+            $('#pieza_list').modal('hide');
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html("Pieza no actualizada");
+        }
+    });
+}
+
+function modal_pieza(){
+    $('#table-pieza').hide();
+    $('#form-pieza').show();
+    $('#btn_a').show();
+    $('#btn_b').hide();
+    //alert("En construcción");
 }
 
 function añadir_pieza(){
-    alert("En construcción");
+    var ubicacion = document.getElementById('ubicacion_pieza').value;
     var dato = document.getElementById('search').value;
-    $('#table-pieza').hide();
-    $('#form-pieza').show();
+    $.ajax({
+        url:'./../Controlador/añadir_pieza_contrl.php?val='+dato,
+        type:'POST',
+        data: "value="+ubicacion,
+    }).done(function(respuesta){
+        console.log(respuesta);
+        if (respuesta==true) {
+            $('#pieza_list').modal('hide');
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html("Pieza añadida al expediente, exitosamente");
+        }else{
+            $('#pieza_list').modal('hide');
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html("Pieza añadida al expediente, no efectuado");
+        }
+    });
 }
 
 function update_form_expe(){
@@ -359,4 +411,209 @@ function incremento_tiempo() {
 }
 
 
+//funciones para el paginado del listado de piezas
+var table;
+var x;
+var element;
+var y;
+var pages;
+var dato;
 
+
+function mostrar_nex(){
+  x = document.getElementById('act').value;    
+  x = parseInt(x)+1;
+  if(x>pages){
+    x=x-1;
+  }
+  document.getElementById('act').value=x;
+  element = 8*x;
+  y=element-8;
+  for (let index = 1; index <= y+1; index++){
+    $("#"+index).hide();
+    //console.log(index);
+  }
+  for (let index = y; index < element; index++){
+    $("#"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#"+index).hide();
+  }
+}
+
+function mostrar_pre(){
+  x = document.getElementById('act').value;    
+  x = parseInt(x)-1;
+  if(x==0){
+    x=x+1;
+  }
+  document.getElementById('act').value=x;
+  element = 8*x;
+  y=element-8;
+  for (let index = 1; index < y; index++){
+    $("#"+index).hide();
+  }
+  for (let index = element; index > y; index--){
+    $("#"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#"+index).hide();
+  }
+}
+
+
+
+function search(){
+  var dato = document.getElementById('q').value;
+  var reg = document.getElementById('tc');
+  num = dato.substring(0,1);
+  
+  // Recorremos todas las filas con contenido de la tabla
+    for (let i = 0; i < reg.rows.length; i++) {
+      var fila = i+1;              
+      var celdas = reg.rows[i].getElementsByTagName('td');
+      if (num/1) {
+        for (let j = 1; j < celdas.length-2; j++) {
+          var dat=celdas[j].innerHTML;
+          //console.log(dat);
+          if (dat==dato) {
+            $("#"+fila).show();
+          }else{
+            if(dato==dat.substring(0, dato.length)){
+              $("#"+fila).show();
+            }else{
+              $("#"+fila).hide();
+            }
+          }
+        }
+      }
+      else{
+        for (let j = 1; j < celdas.length-1; j++) {
+          var dat=celdas[j].innerHTML;
+          if (dat==dato) {
+            $("#"+fila).show();
+          }if(dato==dat.substring(0, dato.length)){
+            $("#"+fila).show();
+          }else{
+            $("#"+fila).hide();
+          }                
+        }
+      }
+    }
+}
+
+function get_list_chart_account(){
+  var dato = document.getElementById('company').value
+  $.ajax({
+    url:'chart_account_list',
+    type:'GET',
+    data: 'company= '+dato,
+  }).done(function(respuesta){
+    $("#tc").html(respuesta);
+    table = document.getElementById('tc').rows.length;
+    group = table/8;
+    pages;
+    if(group % 1 == 0){
+      pages = group;
+    }else{
+      x = group % 1;
+      y = 1 - x;
+        pages = group+y;
+    }
+    x = document.getElementById('act').value;
+    
+    delete_pages();
+    for (let index = 1; index <= pages; index++) {
+      //console.log(index);
+      var option = document.createElement("option");
+      option.setAttribute('value',index);
+      $(option).html(index);
+      $(option).appendTo("#act");
+    }
+    document.getElementById('act').value=x;
+    element = 8*x;
+    y = element-8;
+    for (let index = table; index > element; index--) {
+      $("#"+index).hide();
+      
+    }
+    for (let index = 1; index <= y; index++) {
+      $("#"+index).hide();
+    }
+    //modifico desde aqui
+    
+    var tb = document.getElementById('tc');
+    for (let i = 0; i < 1; i++) {
+      var fila = i+1;              
+      var celdas = tb.rows[i].getElementsByTagName('td');
+      for (let j = 3; j < 4; j++) {
+        var status=celdas[j].innerHTML;
+      }
+    }
+    if (status==1) {
+      $("#save").show();
+    }
+    
+  });
+}
+
+function delete_pages(){
+    $('#act').html('');
+}
+
+function page_actual(val){
+  x = val;    
+  element = 8*x;
+  y = element-8;
+  for (let index = table; index > element; index--) {
+      $("#"+index).hide();
+      
+  }
+    for (let index = 1; index <= y; index++) {
+      $("#"+index).hide();
+    }
+  $('#act').val(x);
+}
+
+function solicitud_modal(){
+    $('#solicitud_modal').modal('show');
+}
+
+function display_form_sol_int(){
+    $('#form_sol_interna').show();
+    $('#form_sol_externa').hide();
+}
+
+function display_form_sol_ext(){
+    $('#form_sol_interna').hide();
+    $('#form_sol_externa').show();   
+}
+
+function display_expe_list(){
+    $('#solicitud_modal').modal('hide');
+    $('#expediente_modal').modal('show');
+    $.ajax({
+        url:'./../Controlador/list_expediente_contrl.php',
+        type:'GET',
+        data: '',
+      }).done(function(respuesta){
+        $('#l_expediente').html(respuesta);
+        console.log(respuesta);
+      });      
+}
+/*
+function active_chekbutton_1(){
+    //Con jquery
+    var select=$('#id_select').val();
+    $('#checkbutton_2').prop('checked', false);
+    $('#checkbutton_3').prop('checked', false);
+    $('#checkbutton_4').prop('checked', false);
+    $('#checkbutton_5').prop('checked', false);
+    //Con javascript
+    var select=document.getElementById('id_select').value;
+    document.getElementById('checkbutton_2').checked='false';
+    document.getElementById('checkbutton_3').checked='false';
+    document.getElementById('checkbutton_4').checked='false';
+    document.getElementById('checkbutton_5').checked='false';
+}
+*/
