@@ -160,3 +160,9 @@ nav
 	background-repeat:  no-repeat;
 	background-position: center;
 }
+
+#l_expediente :hover
+{
+	background-color: rgba(136, 133, 133, 1);
+	color: white;
+}

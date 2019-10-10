@@ -87,7 +87,7 @@
         }
 
         function list_expediente(){
-            $sql= ("select numero_expediente, nacionalidad, cedula_acusado, nombre_acusado, apellido_acusado, estado_id, tribunal from sisco.tribunal_procesado inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id inner join sisco.tribunal on sisco.tribunal_procesado.tribunal_id = sisco.tribunal.id inner join sisco.procesado on sisco.tribunal_procesado.procesado_id = sisco.procesado.id order by numero_expediente");
+            $sql= ("select numero_expediente, nacionalidad, cedula_acusado, nombre_acusado, apellido_acusado, estado, tribunal from sisco.tribunal_procesado inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id inner join sisco.tribunal on sisco.tribunal_procesado.tribunal_id = sisco.tribunal.id inner join sisco.procesado on sisco.tribunal_procesado.procesado_id = sisco.procesado.id inner join sisco.estado on sisco.tribunal.estado_id = sisco.estado.id order by numero_expediente");
             $query=pg_query($sql);
             $fila=pg_fetch_all($query);
             return $fila;

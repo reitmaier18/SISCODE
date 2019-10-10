@@ -755,10 +755,10 @@
                         <div class="md-form offset-md-1">
                             <i class="prefix"data-toggle='modal' onclick="display_expe_list();"><img src="img/icon14.png"></i>
                             <label for="sol_int_expe">Expediente</label>
-                            <input type="text" name="expediente" id="sol_int_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+                            <input type="text" name="expediente" id="sol_int_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true" placeholder="Expediente">
                         </div>
                         <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
-                            <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update" name="estado">
+                            <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="" id="sol_int_pieza" name="pieza">
                                 <option disabled selected>Pieza</option>
                             </select>                            
                         </div>                                
@@ -802,13 +802,13 @@
                         <div class="md-form offset-md-1">
                             <i class="prefix"data-toggle='modal' data-target='' onclick="display_expe_list();"><img src="img/icon14.png"></i>
                             <label for="sol_int_expe">Expediente</label>
-                            <input type="text" name="expediente" id="sol_int_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+                            <input type="text" name="expediente" id="sol_ext_expe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
                         </div>
                         <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
-                                    <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" onclick="listar_tribunales_update();" id="estado_update" name="estado">
-                                        <option disabled selected>Pieza</option>
-                                    </select>                            
-                                </div>                                
+                            <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" id="sol_ext_pieza" name="estado">
+                                <option disabled selected>Pieza</option>
+                            </select>                            
+                        </div>                                
                         
                     </div>
                     <center><button class="btn btn-primary">externa</button></center>

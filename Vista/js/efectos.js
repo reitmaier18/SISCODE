@@ -598,8 +598,32 @@ function display_expe_list(){
         data: '',
       }).done(function(respuesta){
         $('#l_expediente').html(respuesta);
-        console.log(respuesta);
       });      
+}
+
+function seleccion_expe_list(){
+    $("table tbody tr").click(function() {
+        var num = $(this).find("td:eq(1)").text();
+        $('#sol_int_expe').val(num);
+        $('#sol_ext_expe').val(num);
+        $('#expediente_modal').modal('hide');
+        $('#solicitud_modal').modal('show');
+        auto_select_pieza();
+    });  
+}
+
+function auto_select_pieza(){
+    var dato=$('#sol_int_expe').val();
+    $.ajax({
+        url:'./../Controlador/list_pieza_contrl.php?option="1"',
+        type:'POST',
+        data: {expe:dato},
+    }).done(function(respuesta){
+        $('#sol_int_pieza').html(respuesta);
+        $('#sol_ext_pieza').html(respuesta);
+        
+    });
+
 }
 /*
 function active_chekbutton_1(){
