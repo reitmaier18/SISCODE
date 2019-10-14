@@ -131,6 +131,34 @@ nav
 	border-radius: 10px;
 }
 
+#log_sistema
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;
+}
+
+#reporte_estadistico
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;	
+}
+
+#list_reporte_solicitud
+{
+	display: none;
+}
+
+#list_reporte_expediente
+{
+	display: none;
+}
+
 #oculto
 {
 	display:none;
@@ -161,8 +189,44 @@ nav
 	background-position: center;
 }
 
+.btn-search
+{
+	background-image: url(../img/icon6.png);
+	background-repeat:  no-repeat;
+	background-position: center;	
+}
+
 #l_expediente :hover
 {
 	background-color: rgba(136, 133, 133, 1);
 	color: white;
 }
+
+.img-table-acceptar
+{
+	background-image: url(../img/png/check-mark.png);
+	background-size: 16px 16px;
+	background-repeat:  no-repeat;
+	background-position: center;	
+	padding: 16px;
+}
+
+.img-table-acceptar:hover
+{
+	background-image: url(../img/png/checked-symbol.png);
+	background-size: 16px 16px;
+	background-repeat:  no-repeat;
+	background-position: center;	
+	padding: 16px;	
+}
+
+.img-table-cancelar
+{
+	background-image: url(../img/png/remove-button.png);
+	background-size: 16px 16px;
+	background-repeat:  no-repeat;
+	background-position: center;	
+	padding: 16px;
+}
+
+

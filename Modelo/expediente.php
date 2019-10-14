@@ -42,6 +42,8 @@
         
         function registrar_expediente($expediente, $procesado, $tribunal, $ubicacion){
             $exp=$this->consultar_expediente($expediente);
+            $fecha = getdate();
+            $fecha_registro = $fecha['mday']."/".$fecha['month']."/".$fecha['year'];
             if ($exp[0] == $expediente) {
                 echo "Este expediente fue registrado anteriormente";
             }else{
@@ -50,7 +52,7 @@
                 if ($tri_pro == FALSE) {
                     $this->registrar_tribunal_procesado($procesado, $tribunal);
                     $tri_pro = $this->consultar_tribunal_procesado($procesado, $tribunal);
-                    $sql = ("insert into sisco.expediente (numero_expediente, tribunal_procesado_id) values ('$expediente', '$tri_pro[0]')");
+                    $sql = ("insert into sisco.expediente (numero_expediente, tribunal_procesado_id, fecha_expediente, expediente_id) values ('$expediente', '$tri_pro[0]', '$fecha_registro', 0)");
                     $query = pg_query($sql);
                     if ($query==FALSE) {
                         echo "Error al registrar expediente";
@@ -61,7 +63,7 @@
                         echo "Se registro el expediente";
                     }        
                 }else{
-                    $sql = ("insert into sisco.expediente (numero_expediente, tribunal_procesado_id) values ('$expediente', '$tri_pro[0]')");
+                    $sql = ("insert into sisco.expediente (numero_expediente, tribunal_procesado_id, fecha_expediente, expediente_id) values ('$expediente', '$tri_pro[0]', '$fecha_registro', 0)");
                     $query = pg_query($sql);
                     if ($query==FALSE) {
                         echo "Error al registrar expediente";
@@ -139,6 +141,20 @@
             }else{
                 return 'True';
             }   
+        }
+
+        function consultar_pieza_expediente($pieza, $expediente){
+            $sql=("select sisco.expediente.id as expediente, sisco.pieza.id as pieza from sisco.pieza inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id where numero_pieza='$pieza' and numero_expediente = '$expediente'");
+            $query = pg_query($sql);
+            $fila=pg_fetch_all($query);
+            return $fila;
+        }
+
+        function listado_expediente_reporte_por_fecha($desde, $hasta){
+            $sql=("select fecha_expediente, numero_expediente, nacionalidad, cedula_acusado, nombre_acusado, apellido_acusado, estado, tribunal from sisco.tribunal_procesado inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id inner join sisco.tribunal on sisco.tribunal_procesado.tribunal_id = sisco.tribunal.id inner join sisco.procesado on sisco.tribunal_procesado.procesado_id = sisco.procesado.id inner join sisco.estado on sisco.tribunal.estado_id = sisco.estado.id where fecha_expediente between '$desde' and '$hasta' order by fecha_expediente");
+            $query = pg_query($sql);
+            $fila=pg_fetch_all($query);
+            return $fila;   
         }
     }
     

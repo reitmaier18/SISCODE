@@ -6,7 +6,7 @@
     $db->_construct();
     $expediente = new expediente();
     $option=@$_GET['option'];
-    $data = $expediente->consultar_pieza($_POST['expe']);
+    $data = $expediente->consultar_pieza($_POST['value']);
     //echo $_GET['option'];
     if ($option==NULL) {
         for ($i=0; $i < count($data); $i++) { 
@@ -23,7 +23,7 @@
         
         echo "<option disabled selected>Pieza</option>";
         for ($i=0; $i < count($data); $i++) { 
-            echo "<option value='$data[$i]['numero_pieza']'>".$data[$i]['numero_pieza']."</option>";
+            echo "<option value='".$data[$i]['numero_pieza']."'>".$data[$i]['numero_pieza']."</option>";
         }
         
     }
