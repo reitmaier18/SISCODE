@@ -692,14 +692,6 @@ function registrar_solicitud_ext(){
 }
 
 //funciones para el paginado del log del sistema
-var table;
-var x;
-var element;
-var y;
-var pages;
-var dato;
-
-
 function mostrar_nex_log(){
   x = document.getElementById('act_log').value;    
   x = parseInt(x)+1;
@@ -847,9 +839,11 @@ function imprimir_reporte_expediente(){
 }
 
 function reporte_solicitud(){
-    var dato = $('#form_rep_solicitud').serialize();
+    //var dato = $('#form_rep_solicitud').serialize();
     $('#form_rep_solicitud').hide();
     $('#list_reporte_solicitud').show();
+    list_rep_sol();
+    /*
     $.ajax({
         url:'./../Controlador/list_reporte_solicitud_contrl.php',
         type:'POST',
@@ -857,7 +851,8 @@ function reporte_solicitud(){
     }).done(function(respuesta){
         $("#l_reporte_solicitud").html(respuesta);
         
-    });      
+    });
+    */      
 }
 
 function reiniciar_reporte_solicitud(){
@@ -866,9 +861,11 @@ function reiniciar_reporte_solicitud(){
 }
 
 function reporte_expediente(){
-    var dato = $('#form_rep_expediente').serialize();
+    //var dato = $('#form_rep_expediente').serialize();
     $('#form_rep_expediente').hide();
     $('#list_reporte_expediente').show();
+    list_rep_exp();
+    /*
     $.ajax({
         url:'./../Controlador/list_reporte_expediente_contrl.php',
         type:'POST',
@@ -876,10 +873,268 @@ function reporte_expediente(){
     }).done(function(respuesta){
         $("#l_reporte_expediente").html(respuesta);
         
-    });      
+    });
+    */      
 }
 
 function reiniciar_reporte_expediente(){
     $('#form_rep_expediente').show();
     $('#list_reporte_expediente').hide();
+}
+
+//paginado de las solicitudes/////////////////////////////////////////////////////////////
+function mostrar_nex_rep_sol(){
+  x = document.getElementById('act_rep_sol').value;    
+  x = parseInt(x)+1;
+  if(x>pages){
+    x=x-1;
+  }
+  document.getElementById('act_rep_sol').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index <= y+1; index++){
+    $("#rep_sol"+index).hide();
+    //console.log(index);
+  }
+  for (let index = y; index < element; index++){
+    $("#rep_sol"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#rep_sol"+index).hide();
+  }
+}
+
+function mostrar_pre_rep_sol(){
+  x = document.getElementById('act_rep_sol').value;    
+  x = parseInt(x)-1;
+  if(x==0){
+    x=x+1;
+  }
+  document.getElementById('act_rep_sol').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index < y; index++){
+    $("#rep_sol"+index).hide();
+  }
+  for (let index = element; index > y; index--){
+    $("#rep_sol"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#rep_sol"+index).hide();
+  }
+}
+
+function search_rep_sol(){
+  var dato = document.getElementById('q').value;
+  var reg = document.getElementById('l_reporte_solicitud');
+  num = dato.substring(0,1);
+  
+  // Recorremos todas las filas con contenido de la tabla
+    for (let i = 0; i < reg.rows.length; i++) {
+      var fila = i+1;              
+      var celdas = reg.rows[i].getElementsByTagName('td');
+      if (num/1) {
+        for (let j = 1; j < celdas.length-2; j++) {
+          var dat=celdas[j].innerHTML;
+          //console.log(dat);
+          if (dat==dato) {
+            $("#rep_sol"+fila).show();
+          }else{
+            if(dato==dat.substring(0, dato.length)){
+              $("#rep_sol"+fila).show();
+            }else{
+              $("#rep_sol"+fila).hide();
+            }
+          }
+        }
+      }
+      else{
+        for (let j = 1; j < celdas.length-1; j++) {
+          var dat=celdas[j].innerHTML;
+          if (dat==dato) {
+            $("#rep_sol"+fila).show();
+          }if(dato==dat.substring(0, dato.length)){
+            $("#rep_sol"+fila).show();
+          }else{
+            $("#rep_sol"+fila).hide();
+          }                
+        }
+      }
+    }
+}
+
+function list_rep_sol(){
+  var dato = $('#form_rep_solicitud').serialize();
+  $.ajax({
+        url:'./../Controlador/list_reporte_solicitud_contrl.php',
+        type:'POST',
+        data: dato,
+    }).done(function(respuesta){
+    $("#l_reporte_solicitud").html(respuesta);
+    table = document.getElementById('l_reporte_solicitud').rows.length;
+    group = table/4;
+    pages;
+    if(group % 1 == 0){
+      pages = group;
+    }else{
+      x = group % 1;
+      y = 1 - x;
+        pages = group+y;
+    }
+    x = document.getElementById('act_rep_sol').value;
+    
+    delete_pages_rep_sol();
+    for (let index = 1; index <= pages; index++) {
+      //console.log(index);
+      var option = document.createElement("option");
+      option.setAttribute('value',index);
+      $(option).html(index);
+      $(option).appendTo("#act_rep_sol");
+    }
+    document.getElementById('act_rep_sol').value=x;
+    element = 4*x;
+    y = element-4;
+    for (let index = table; index > element; index--) {
+      $("#rep_sol"+index).hide();
+      
+    }
+    for (let index = 1; index <= y; index++) {
+      $("#rep_sol"+index).hide();
+    }
+  });
+}
+
+function delete_pages_rep_sol(){
+    $('#act_rep_sol').html('');
+}
+
+//paginado del reporte de expedientes
+
+function mostrar_nex_rep_exp(){
+  x = document.getElementById('act_rep_exp').value;    
+  x = parseInt(x)+1;
+  if(x>pages){
+    x=x-1;
+  }
+  document.getElementById('act_rep_exp').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index <= y+1; index++){
+    $("#rep_exp"+index).hide();
+    //console.log(index);
+  }
+  for (let index = y; index < element; index++){
+    $("#rep_exp"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#rep_exp"+index).hide();
+  }
+}
+
+function mostrar_pre_rep_exp(){
+  x = document.getElementById('act_rep_exp').value;    
+  x = parseInt(x)-1;
+  if(x==0){
+    x=x+1;
+  }
+  document.getElementById('act_rep_exp').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index < y; index++){
+    $("#rep_exp"+index).hide();
+  }
+  for (let index = element; index > y; index--){
+    $("#rep_exp"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#rep_exp"+index).hide();
+  }
+}
+
+function search_rep_exp(){
+  var dato = document.getElementById('q').value;
+  var reg = document.getElementById('l_reporte_expediente');
+  num = dato.substring(0,1);
+  
+  // Recorremos todas las filas con contenido de la tabla
+    for (let i = 0; i < reg.rows.length; i++) {
+      var fila = i+1;              
+      var celdas = reg.rows[i].getElementsByTagName('td');
+      if (num/1) {
+        for (let j = 1; j < celdas.length-2; j++) {
+          var dat=celdas[j].innerHTML;
+          //console.log(dat);
+          if (dat==dato) {
+            $("#rep_exp"+fila).show();
+          }else{
+            if(dato==dat.substring(0, dato.length)){
+              $("#rep_exp"+fila).show();
+            }else{
+              $("#rep_exp"+fila).hide();
+            }
+          }
+        }
+      }
+      else{
+        for (let j = 1; j < celdas.length-1; j++) {
+          var dat=celdas[j].innerHTML;
+          if (dat==dato) {
+            $("#rep_exp"+fila).show();
+          }if(dato==dat.substring(0, dato.length)){
+            $("#rep_exp"+fila).show();
+          }else{
+            $("#rep_exp"+fila).hide();
+          }                
+        }
+      }
+    }
+}
+
+function list_rep_exp(){
+  var dato = $('#form_rep_expediente').serialize();
+  $.ajax({
+        url:'./../Controlador/list_reporte_expediente_contrl.php',
+        type:'POST',
+        data: dato,
+    }).done(function(respuesta){
+    $("#l_reporte_expediente").html(respuesta);
+    table = document.getElementById('l_reporte_expediente').rows.length;
+    group = table/4;
+    pages;
+    if(group % 1 == 0){
+      pages = group;
+    }else{
+      x = group % 1;
+      y = 1 - x;
+        pages = group+y;
+    }
+    x = document.getElementById('act_rep_exp').value;
+    
+    delete_pages_rep_exp();
+    for (let index = 1; index <= pages; index++) {
+      //console.log(index);
+      var option = document.createElement("option");
+      option.setAttribute('value',index);
+      $(option).html(index);
+      $(option).appendTo("#act_rep_exp");
+    }
+    document.getElementById('act_rep_exp').value=x;
+    element = 4*x;
+    y = element-4;
+    for (let index = table; index > element; index--) {
+      $("#rep_exp"+index).hide();
+      
+    }
+    for (let index = 1; index <= y; index++) {
+      $("#rep_exp"+index).hide();
+    }
+  });
+}
+
+function delete_pages_rep_exp(){
+    $('#act_rep_exp').html('');
+}
+
+function mostrar_grafica(){
+    $('#grafica_modal').modal('show');
 }

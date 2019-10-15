@@ -11,7 +11,7 @@
 	$fila=0;
 	for ($i=0; $i < count($data); $i++) { 
 		$fila++;
-		echo "<tr id='".($fila)."'>";
+		echo "<tr id='rep_sol".($fila)."'>";
 		echo "<td>".($fila)."</td>";
 		echo "<td>".$data[$i]['fecha']."</td>";
 		echo "<td>".$data[$i]['nombre']." ".$data[$i]['apellido']."</td>";

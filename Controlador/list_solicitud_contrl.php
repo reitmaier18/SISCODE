@@ -59,7 +59,7 @@
 				$fila++;
 				echo "<tr id='".($fila)."'>";
 				echo "<td>".($fila)."</td>";
-				echo "<td>".$dat[$i]['fecha']." (".$dat[$i]['hora'].":".$dat[$i]['minuto'].":".$dat[$i]['segundo'].")</td>";
+				echo "<td>".$data[$i]['fecha']." (".$data[$i]['hora'].":".$data[$i]['minuto'].":".$data[$i]['segundo'].")</td>";
 				echo "<td>".$data[$i]['nombre']." ".$data[$i]['apellido']."</td>";
 				echo "<td>".$data[$i]['tipo']."</td>";
 				echo "<td>".$data[$i]['numero_expediente']."</td>";
@@ -90,7 +90,7 @@
 				$fila++;
 				echo "<tr id='".($fila)."'>";
 				echo "<td>".($fila)."</td>";
-				echo "<td>".$dat[$i]['fecha']." (".$dat[$i]['hora'].":".$dat[$i]['minuto'].":".$dat[$i]['segundo'].")</td>";
+				echo "<td>".$data[$i]['fecha']." (".$data[$i]['hora'].":".$data[$i]['minuto'].":".$data[$i]['segundo'].")</td>";
 				echo "<td>".$data[$i]['nombre']." ".$data[$i]['apellido']."</td>";
 				echo "<td>".$data[$i]['tipo']."</td>";
 				echo "<td>".$data[$i]['numero_expediente']."</td>";
@@ -121,7 +121,7 @@
 				$fila++;
 				echo "<tr id='".($fila)."'>";
 				echo "<td>".($fila)."</td>";
-				echo "<td>".$dat[$i]['fecha']." (".$dat[$i]['hora'].":".$dat[$i]['minuto'].":".$dat[$i]['segundo'].")</td>";
+				echo "<td>".$data[$i]['fecha']." (".$data[$i]['hora'].":".$data[$i]['minuto'].":".$data[$i]['segundo'].")</td>";
 				echo "<td>".$data[$i]['nombre']." ".$data[$i]['apellido']."</td>";
 				echo "<td>".$data[$i]['tipo']."</td>";
 				echo "<td>".$data[$i]['numero_expediente']."</td>";
@@ -138,7 +138,7 @@
 				$fila++;
 				echo "<tr id='".($fila)."'>";
 				echo "<td>".($fila)."</td>";
-				echo "<td>".$dat[$i]['fecha']." (".$dat[$i]['hora'].":".$dat[$i]['minuto'].":".$dat[$i]['segundo'].")</td>";
+				echo "<td>".$data[$i]['fecha']." (".$data[$i]['hora'].":".$data[$i]['minuto'].":".$data[$i]['segundo'].")</td>";
 				echo "<td>".$data[$i]['nombre']." ".$data[$i]['apellido']."</td>";
 				echo "<td>".$data[$i]['tipo']."</td>";
 				echo "<td>".$data[$i]['numero_expediente']."</td>";

@@ -11,10 +11,11 @@
     $sistem = new sistem();
     $data=$expediente->listado_expediente_reporte_por_fecha($_POST['desde'], $_POST['hasta']);
     $a=count($data);
-    
+    $fila=0;
     for ($i=0; $i < $a; $i++) { 
-    	echo "<tr>";
-    	echo "<td>".($i+1)."</td>";
+        $fila++;
+    	echo "<tr id='rep_exp".($fila)."'>";
+    	echo "<td>".$fila."</td>";
     	echo "<td>".$data[$i]['fecha_expediente']."</td>";
     	echo "<td>".$data[$i]['numero_expediente']."</td>";
     	if ($data[$i]['nacionalidad']==1) {
