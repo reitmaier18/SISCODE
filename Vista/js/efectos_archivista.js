@@ -618,7 +618,7 @@ function registrar_solicitud_int(){
     }).done(function(respuesta){
         $('#solicitud_modal').modal('hide');
         $("#mensaje").modal("show");
-        $("#mensaje_text").html(respuesta);
+        $("#mensaje_text").html('Se registro su solicitud');
         list_solicitud();
     });  
 }
@@ -632,7 +632,7 @@ function registrar_solicitud_ext(){
     }).done(function(respuesta){
         $('#solicitud_modal').modal('hide');
         $("#mensaje").modal("show");
-        $("#mensaje_text").html(respuesta);
+        $("#mensaje_text").html('Se registro su solicitud');
         list_solicitud();
     });  
 }

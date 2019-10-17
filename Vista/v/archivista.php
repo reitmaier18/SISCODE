@@ -236,6 +236,7 @@
                                     <th>Expediente</th>
                                     <th>Pieza</th>
                                     <th>Área solicitante</th>
+                                    <th>Estatus</th>
                                     <th>Acción</th>
                                 </thead>
                                 <tbody id="list_solicitud">
