@@ -637,6 +637,30 @@ function registrar_solicitud_ext(){
     });  
 }
 
+function gestionar_solicitud(){
+    $("table tbody tr").click(function() {
+        var id = $(this).find("td:eq(1)").text();
+        var expediente = $(this).find("td:eq(5)").text();
+        var pieza = $(this).find("td:eq(6)").text();
+        var ubicacion = $(this).find("td:eq(7)").text();
+        $.ajax({
+            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'&ubicacion='+ubicacion,
+        }).done(function(respuesta){
+            
+            if (respuesta==1) {
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Solicitud actualizada');
+                list_solicitud();
+            }else{
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Surgió un error en la acción');
+                list_solicitud();
+            }
+
+        });       
+    });   
+}
+
 //funciones para el paginado del log del sistema
 function mostrar_nex_log(){
   x = document.getElementById('act_log').value;    
@@ -1080,3 +1104,4 @@ function list_rep_exp(){
 function delete_pages_rep_exp(){
     $('#act_rep_exp').html('');
 }
+

@@ -143,6 +143,27 @@
             }   
         }
 
+        function consultar_ubicacion($ubicacion){
+            $sql=("select sisco.ubicacion.id as ubicacion from sisco.ubicacion where ubicacion='$ubicacion'");
+            $query = pg_query($sql);
+            $fila=pg_fetch_all($query);
+            return $fila;
+        }
+
+        function update_pieza_ubicacion($expediente, $pieza, $ubicacion){
+            $exp=$this->consultar_expediente($expediente);
+            //var_dump($exp);
+            $ubi= $this->consultar_ubicacion($ubicacion);
+            $a = $ubi[0]['ubicacion'];
+            $sql = ("update sisco.pieza set ubicacion_id = '$a' where expediente_id = '$exp[1]' and numero_pieza='$pieza'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 'False';
+            }else{
+                return 'True';
+            }   
+        }
+
         function consultar_pieza_expediente($pieza, $expediente){
             $sql=("select sisco.expediente.id as expediente, sisco.pieza.id as pieza from sisco.pieza inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id where numero_pieza='$pieza' and numero_expediente = '$expediente'");
             $query = pg_query($sql);

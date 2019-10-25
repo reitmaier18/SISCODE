@@ -316,19 +316,31 @@ function registrar_solicitud_int(){
     });  
 }
 
-function registrar_solicitud_ext(){
-    var dato = $('#form_sol_externa').serialize();
-    $.ajax({
-        url:'./../Controlador/registrar_solicitud_contrl.php?option=1',
-        type:'POST',
-        data: dato,
-    }).done(function(respuesta){
-        $('#solicitud_modal').modal('hide');
-        $("#mensaje").modal("show");
-        $("#mensaje_text").html('Se registro su solicitud');
-        list_solicitud();
-    });  
+function gestionar_solicitud(){
+    $("table tbody tr").click(function() {
+        var id = $(this).find("td:eq(1)").text();
+        var expediente = $(this).find("td:eq(5)").text();
+        var pieza = $(this).find("td:eq(6)").text();
+        var ubicacion = $(this).find("td:eq(7)").text();
+        $.ajax({
+            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'ubicacion='+ubicacion,
+        }).done(function(respuesta){
+            
+            if (respuesta==1) {
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Solicitud actualizada');
+                list_solicitud();
+            }else{
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Surgió un error en la acción');
+                list_solicitud();
+            }
+
+        });       
+    });   
 }
+
+
 
 //funciones para el paginado del log del sistema
 function mostrar_nex_log(){

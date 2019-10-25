@@ -1,0 +1,176 @@
+CREATE DATABASE siscode
+CREATE SCHEMA sisco
+CREATE TABLE sisco.estado
+(
+  id serial NOT NULL,
+  estado character varying(20),
+  CONSTRAINT id_estado PRIMARY KEY (id)
+)
+
+CREATE TABLE sisco.estatus
+(
+  id serial NOT NULL,
+  estatus integer,
+  solicitud_id integer,
+  expediente_id integer,
+  CONSTRAINT id_estatus PRIMARY KEY (id),
+  CONSTRAINT expediente_fk FOREIGN KEY (expediente_id)
+      REFERENCES sisco.expediente (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT solicitud_fk FOREIGN KEY (solicitud_id)
+      REFERENCES sisco.solicitud (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.expediente
+(
+  id serial NOT NULL,
+  numero_expediente character varying(50),
+  tribunal_procesado_id integer,
+  expediente_id integer,
+  fecha_expediente date,
+  CONSTRAINT id_expediente PRIMARY KEY (id),
+  CONSTRAINT tribunal_procesado_fk FOREIGN KEY (tribunal_procesado_id)
+      REFERENCES sisco.tribunal_procesado (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.log_sistema
+(
+  id serial NOT NULL,
+  usuario_id integer,
+  ip character varying(30),
+  descripcion character varying(200),
+  fecha timestamp with time zone,
+  CONSTRAINT id_log_sistema PRIMARY KEY (id),
+  CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+      REFERENCES sisco.usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.pieza
+(
+  id serial NOT NULL,
+  expediente_id integer NOT NULL,
+  ubicacion_id integer NOT NULL,
+  numero_pieza integer,
+  CONSTRAINT id_pieza PRIMARY KEY (id),
+  CONSTRAINT expediente_fk FOREIGN KEY (expediente_id)
+      REFERENCES sisco.expediente (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ubicacion_fk FOREIGN KEY (ubicacion_id)
+      REFERENCES sisco.ubicacion (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.procesado
+(
+  id serial NOT NULL,
+  nombre_acusado character varying(20),
+  apellido_acusado character varying(20),
+  nacionalidad integer,
+  cedula_acusado integer NOT NULL,
+  CONSTRAINT id_procesado PRIMARY KEY (id)
+)
+
+CREATE TABLE sisco.rol
+(
+  id serial NOT NULL,
+  rol character varying(20),
+  CONSTRAINT id_rol PRIMARY KEY (id)
+)
+
+CREATE TABLE sisco.solicitante_externo
+(
+  id serial NOT NULL,
+  nombre character varying(20),
+  apellido character varying(20),
+  nacionalidad integer,
+  cedula integer,
+  usuario_id integer,
+  CONSTRAINT id_solicitante_externo PRIMARY KEY (id),
+  CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+      REFERENCES sisco.usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.solicitud
+(
+  id serial NOT NULL,
+  fecha timestamp with time zone,
+  usuario_id integer,
+  tipo_solicitud_id integer,
+  pieza_id integer,
+  ubicacion_id integer,
+  estatus integer NOT NULL DEFAULT 0,
+  CONSTRAINT id_solicitud PRIMARY KEY (id),
+  CONSTRAINT pieza_fk FOREIGN KEY (pieza_id)
+      REFERENCES sisco.pieza (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT tipo_solicitud_fk FOREIGN KEY (tipo_solicitud_id)
+      REFERENCES sisco.tipo_solicitud (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ubicacion_fk FOREIGN KEY (ubicacion_id)
+      REFERENCES sisco.ubicacion (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.tipo_solicitud
+(
+  id serial NOT NULL,
+  tipo character varying(20),
+  CONSTRAINT id_tipo_solicitud PRIMARY KEY (id)
+)
+
+CREATE TABLE sisco.tribunal
+(
+  id serial NOT NULL,
+  tribunal character varying(100),
+  estado_id integer,
+  CONSTRAINT id_tribunal PRIMARY KEY (id),
+  CONSTRAINT estado_fk FOREIGN KEY (estado_id)
+      REFERENCES sisco.estado (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.tribunal_procesado
+(
+  id serial NOT NULL,
+  procesado_id integer,
+  tribunal_id integer,
+  CONSTRAINT id_tribunal_procesado PRIMARY KEY (id),
+  CONSTRAINT procesado_fk FOREIGN KEY (procesado_id)
+      REFERENCES sisco.procesado (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT tribunal_fk FOREIGN KEY (tribunal_id)
+      REFERENCES sisco.tribunal (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE sisco.ubicacion
+(
+  id serial NOT NULL,
+  ubicacion character varying(50),
+  CONSTRAINT id_ubicacion PRIMARY KEY (id)
+)
+
+CREATE TABLE sisco.usuario
+(
+  id serial NOT NULL,
+  rol_id integer,
+  nombre character varying(20),
+  apellido character varying(20),
+  nacionalidad integer,
+  cedula integer,
+  usuario character varying(20),
+  password character varying(20),
+  estatus integer NOT NULL,
+  ubicacion_id integer NOT NULL,
+  CONSTRAINT id_usuario PRIMARY KEY (id),
+  CONSTRAINT rol_fk FOREIGN KEY (rol_id)
+      REFERENCES sisco.rol (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ubicacion_f FOREIGN KEY (ubicacion_id)
+      REFERENCES sisco.ubicacion (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)

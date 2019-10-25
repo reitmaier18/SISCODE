@@ -35,14 +35,14 @@
         * Función para listar solicitudes del usuario por roll
         */
     	function listar_solicitud_alguacil_int(){
-    		$sql = ("select date(fecha) as fecha, extract(hour from fecha) as hora, extract(minute from fecha) as minuto, extract(second from fecha) as segundo,nombre, apellido, tipo, numero_expediente, numero_pieza, ubicacion, sisco.solicitud.estatus as estatus, sisco.solicitud.id from sisco.solicitud inner join sisco.usuario on sisco.solicitud.usuario_id = sisco.usuario.id inner join sisco.tipo_solicitud on sisco.solicitud.tipo_solicitud_id = sisco.tipo_solicitud.id inner join sisco.pieza on sisco.solicitud.pieza_id = sisco.pieza.id inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id inner join sisco.ubicacion on sisco.solicitud.ubicacion_id = sisco.ubicacion.id where sisco.solicitud.estatus=1 and sisco.solicitud.estatus=2");
+    		$sql = ("select date(fecha) as fecha, extract(hour from fecha) as hora, extract(minute from fecha) as minuto, extract(second from fecha) as segundo,nombre, apellido, tipo, numero_expediente, numero_pieza, ubicacion, sisco.solicitud.estatus as estatus, sisco.solicitud.id from sisco.solicitud inner join sisco.usuario on sisco.solicitud.usuario_id = sisco.usuario.id inner join sisco.tipo_solicitud on sisco.solicitud.tipo_solicitud_id = sisco.tipo_solicitud.id inner join sisco.pieza on sisco.solicitud.pieza_id = sisco.pieza.id inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id inner join sisco.ubicacion on sisco.solicitud.ubicacion_id = sisco.ubicacion.id where sisco.solicitud.estatus=1 or sisco.solicitud.estatus=2");
     		$query=pg_query($sql);
             $fila=pg_fetch_all($query);
             return $fila;
     	}
 
         function listar_solicitud_alguacil_ext(){
-            $sql = ("select date(fecha) as fecha, extract(hour from fecha) as hora, extract(minute from fecha) as minuto, extract(second from fecha) as segundo,nombre, apellido, tipo, numero_expediente, numero_pieza, ubicacion, sisco.solicitud.estatus as estatus, sisco.solicitud.id from sisco.solicitud inner join sisco.solicitante_externo on sisco.solicitud.usuario_id = sisco.solicitante_externo.id inner join sisco.tipo_solicitud on sisco.solicitud.tipo_solicitud_id = sisco.tipo_solicitud.id inner join sisco.pieza on sisco.solicitud.pieza_id = sisco.pieza.id inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id inner join sisco.ubicacion on sisco.solicitud.ubicacion_id = sisco.ubicacion.id where sisco.solicitud.estatus=1 and sisco.solicitud.estatus=2");
+            $sql = ("select date(fecha) as fecha, extract(hour from fecha) as hora, extract(minute from fecha) as minuto, extract(second from fecha) as segundo,nombre, apellido, tipo, numero_expediente, numero_pieza, ubicacion, sisco.solicitud.estatus as estatus, sisco.solicitud.id from sisco.solicitud inner join sisco.solicitante_externo on sisco.solicitud.usuario_id = sisco.solicitante_externo.id inner join sisco.tipo_solicitud on sisco.solicitud.tipo_solicitud_id = sisco.tipo_solicitud.id inner join sisco.pieza on sisco.solicitud.pieza_id = sisco.pieza.id inner join sisco.expediente on sisco.pieza.expediente_id = sisco.expediente.id inner join sisco.ubicacion on sisco.solicitud.ubicacion_id = sisco.ubicacion.id where sisco.solicitud.estatus=1 or sisco.solicitud.estatus=2");
             $query=pg_query($sql);
             $fila=pg_fetch_all($query);
             return $fila;
@@ -110,7 +110,43 @@
         }
 
         function aprobar_solicitud($id){
+            $sql = ("update sisco.solicitud set estatus=1 where sisco.solicitud.id='$id'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
 
+        function transportar_solicitud($id){
+            $sql = ("update sisco.solicitud set estatus=2 where sisco.solicitud.id='$id'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        function recibir_solicitud($id){
+            $sql = ("update sisco.solicitud set estatus=3 where sisco.solicitud.id='$id'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        function cancelar_solicitud($id){
+            $sql = ("update sisco.solicitud set estatus=4 where sisco.solicitud.id='$id'");
+            $query=pg_query($sql);
+            if ($query == 'FALSE') {
+                return 0;
+            }else{
+                return 1;
+            }
         }
     }
 ?>
