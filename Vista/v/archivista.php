@@ -1,6 +1,9 @@
 <?php 
     if ($_SESSION['id']==NULL) {
-        header('Location: ../login2.php');
+        header('Location: ../../login2.php');
+    }
+    if ($_SESSION['rol']==NULL||$_SESSION['rol']=='Alguacil'||$_SESSION['rol']=='Juez'||$_SESSION['rol']=='Administrador') {
+        header('Location: ../main.php');
     }
 ?>
 <!DOCTYPE html>
@@ -50,6 +53,7 @@
                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REPORTES </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
                             <a class="dropdown-item" onclick="mostrar_mod_reporte_estadistico();">Estadistica</a>
+                            <a class="dropdown-item" onclick="mostrar_inventario();">Inventario</a>
                         </div>
                     </li>
 
@@ -219,13 +223,6 @@
                     <!-- Listado de solicitudes -->
                     <div class="col-md-10" id="solicitud_list">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Listado de solicitudes</h2>
-                        <div class="col-md-4">
-                            <div class="md-form">
-                                <i class="prefix"data-toggle='modal' data-target='#solicitud_modal'><img src="img/icon6.png"></i>
-                                <label for="search">Buscar...</label>
-                                <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
-                            </div>
-                        </div>
                         <div>
                             <hr>
                             <table class="table table-bordered">
@@ -263,30 +260,35 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <center><button class="btn btn-primary" onclick="solicitud_modal();">Solicitar</button></center>
+                        <?php if ($_SESSION['rol']=='Archivista') {
+                            echo "<center><button class='btn btn-primary' onclick='solicitud_modal();'>Solicitar</button></center>";
+                        } ?>
+                        
                         <br>
                     </div>
 
                 
 
-                    <!-- Reportes de solicitudes atendidas-->
+                    <!-- Reportes de estadisticos-->
                     <div class="col-md-10" id="reporte_estadistico">
                         <h2 class="h2-responsive font-weight-bold text-center my-5">Estadísticas</h2>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                       <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="Solicitudes procesadas"
-                                          aria-selected="true" onclick="mostrar_estadistica_solicitud();">Solicitudes</a>
+                                          aria-selected="true" onclick="mostrar_estadistica_solicitud();">Solicitudes atendidas</a>
                                       </li>
                                       <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="Expedientes registrados"
-                                          aria-selected="false" onclick="mostrar_estadistica_expediente();">Expedientes</a>
+                                          aria-selected="false" onclick="mostrar_estadistica_expediente();">Expedientes registrados</a>
                                       </li>
-                                      
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="Expedientes registrados"
+                                          aria-selected="false" onclick="mostrar_estadistica();">Estadistica y gráficos</a>
+                                      </li>
                                     </ul>
-                                    
                                 </div>
                                 <hr>
                             </div>
@@ -313,6 +315,7 @@
                                 <br>
 
                             </form>
+                            <!--Listado del reporte de solicitudes-->
                             <div id="list_reporte_solicitud">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
@@ -336,7 +339,7 @@
                                                 <div class="btn-group" role="group" aria-label="...">
                                                   <button class="btn btn-blue-grey btn-next" type="button" onclick="mostrar_pre_rep_sol();"></button>
                                                   <div class="btn-group" role="group">
-                                                    <select name="p" id="act_" class="form-control" onchange="list_rep_sol();">
+                                                    <select name="p" id="act_rep_sol" class="form-control" onchange="list_rep_sol();">
                                                        <option value="1">1</option>
                                                     </select>
                                                     </div>
@@ -347,7 +350,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <center><button class="btn btn-primary" onclick="imprimir_reporte_solicitud();">Imprimir PDF</button> <button class="btn btn-blue-grey" onclick="reiniciar_reporte_solicitud();">Regresar</button></center>
+                                <center><button class="btn btn-primary" onclick="imprimir_reporte_solicitud();">Imprimir PDF</button> <button class="btn btn-blue-grey" onclick="reiniciar_reporte_solicitud();">Regresar</button> </center>
                                 <br>
                             </div>
                         </div>
@@ -373,6 +376,7 @@
                                 </div>
                                 <br>
                             </form>
+                            <!--Listado del reporte de expedientes-->
                             <div id="list_reporte_expediente">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
@@ -397,7 +401,7 @@
                                                 <div class="btn-group" role="group" aria-label="...">
                                                   <button class="btn btn-blue-grey btn-next" type="button" onclick="mostrar_pre_rep_exp();"></button>
                                                   <div class="btn-group" role="group">
-                                                    <select name="p" id="act_" class="form-control" onchange="list_rep_exp();">
+                                                    <select name="p" id="act_rep_exp" class="form-control" onchange="list_rep_exp();">
                                                        <option value="1">1</option>
                                                     </select>
                                                     </div>
@@ -412,7 +416,130 @@
                                 <br>
                             </div>
                         </div>
-                    </div>    
+
+                        <div id="reporte_estadistica" class="oc">
+                            <hr>
+                            <form  class="col-md-12" id="form_rep_estadistica">
+                                <div class="input-group">
+                                    <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
+                                        <!--img src="img/icon2.png" class="prefix"-->
+                                        <input type="date" name="desde" id="desde_estadistica" class="form-control validate">
+                                        <label for="desde_estadistica">Fecha de inicio</label>                            
+                                    </div>
+                                    <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
+                                        <!--img src="img/icon2.png" class="prefix"-->
+                                        <input type="date" name="hasta" id="hasta_estadistica" class="form-control validate">
+                                        <label for="hasta_estadistica">Fecha de cierre</label>                            
+                                    </div>
+                                    <div class="col-md-8 offset-md-2">
+                                        <center><label class="btn btn-primary" onclick="reporte_estadistica();">Generar reporte</label></center>
+                                                                    
+                                    </div>
+                                    
+                                </div>
+                                <br>
+                            </form>
+                            <div id="list_reporte_estadistica">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Actividad</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="l_reporte_estadistica">
+                                    </tbody>
+                                </table>
+                                <center><button class="btn btn-primary" onclick="imprimir_reporte_estadistica();">Imprimir PDF</button> <button class="btn btn-blue-grey" onclick="reiniciar_reporte_estadistica();">Regresar</button> <button class="btn btn-success" onclick="mostrar_grafica();">Graficas</button></center>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reportes de inventario-->
+                    <div class="col-md-10" id="inventario">
+                        <h2 class="h2-responsive font-weight-bold text-center my-5">   Inventario</h2>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="Solicitudes procesadas"
+                                          aria-selected="true" onclick="mostrar_inv();">Inventario de expedientes y piezas</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="Expedientes registrados"
+                                          aria-selected="false" onclick="mostrar_exp();">Expedientes por estados</a>
+                                      </li>
+                                      
+                                    </ul>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div id="list_inventario">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <th width="10%">#</th>
+                                    <th width="20%">Número de Expediente</th>
+                                    <th width="20%">Número de Pieza</th>
+                                    <th>Ubicación</th>
+                                </thead>
+                                <tbody id="l_inventario"></tbody>
+                                <tfoot>
+                                    <tr>
+                                      <td colspan="100">
+                                        <div class="text-right">
+                                          <div class="input-append input-append">
+                                            <div class="btn-group" role="group" aria-label="...">
+                                              <button class="btn btn-blue-grey btn-next" type="button" onclick="mostrar_pre_inventario();"></button>
+                                              <div class="btn-group" role="group">
+                                                <select name="p" id="act_inventario" class="form-control" onchange="list_inventario();">
+                                                   <option value="1">1</option>
+                                                </select>
+                                                </div>
+                                              <button class="btn btn-blue-grey btn-back" type="button" onclick="mostrar_nex_inventario()"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <center><button class="btn btn-primary" onclick="imprimir_inventario();">Imprimir PDF</button></center>
+                            <br>
+                        </div>
+                        <div id="list_rep_exp_est" class="oc">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <th width="5%">#</th>
+                                    <th width="20%">Estado</th>
+                                    <th width="20%">Cantidad</th>
+                                </thead>
+                                <tbody id="l_rep_exp_est"></tbody>
+                                <tfoot>
+                                    <tr>
+                                      <td colspan="100">
+                                        <div class="text-right">
+                                          <div class="input-append input-append">
+                                            <div class="btn-group" role="group" aria-label="...">
+                                              <button class="btn btn-blue-grey btn-next" type="button" onclick="mostrar_pre_exp_est();"></button>
+                                              <div class="btn-group" role="group">
+                                                <select name="p" id="act_exp_est" class="form-control" onchange="list_exp_est();">
+                                                   <option value="1">1</option>
+                                                </select>
+                                                </div>
+                                              <button class="btn btn-blue-grey btn-back" type="button" onclick="mostrar_nex_exp_est()"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <center><button class="btn btn-primary" onclick="imprimir_reporte_expediente_estado();">Imprimir PDF</button></center>
+                            <br>
+                        </div>
+                    </div>     
                         <!--Hasta aqui llega el container-->
                     </div>
                     
@@ -875,6 +1002,7 @@
     </div>
     </div>
 
+    <?php require 'graficas.php'; ?>
     <!-- Modal para listar los expedientes -->
     <div class="modal fade" id="expediente_modal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="false">
@@ -885,9 +1013,9 @@
                 <br>
                 <div class="md-form input-group col-md-4 offset-md-4">
                   <div class="input-group-append" id="MaterialButton-addon4">
-                    <button class="btn btn-md btn-rounded btn-link btn-search  m-0 px-3" type="button"></button>
+                    <button class="btn btn-md btn-rounded btn-link btn-search  m-0 px-3" type="button" onclick="search_expe_list();"></button>
                     </div>
-                  <input type="text" class="form-control" size="10" placeholder="Buscar..." 
+                  <input type="text" class="form-control" size="10" id="search_expe" placeholder="Buscar..." 
                     aria-describedby="MaterialButton-addon4">
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

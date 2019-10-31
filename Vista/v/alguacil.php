@@ -2,6 +2,9 @@
     if ($_SESSION['id']==NULL) {
         header('Location: ../login2.php');
     }
+    if ($_SESSION['rol']==NULL||$_SESSION['rol']=='Administrador'||$_SESSION['rol']=='Juez'||$_SESSION['rol']=='Archivista'||$_SESSION['rol']=='Jefe de archivo') {
+        header('Location: ../main.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">

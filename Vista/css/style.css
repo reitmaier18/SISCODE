@@ -149,6 +149,15 @@ nav
 	border-radius: 10px;	
 }
 
+#inventario
+{
+	margin-top: 5%;
+	background-color: #e2e2f8;
+	display: none;
+	opacity: 0.9;
+	border-radius: 10px;		
+}
+
 #list_reporte_solicitud
 {
 	display: none;
@@ -157,6 +166,11 @@ nav
 #list_reporte_expediente
 {
 	display: none;
+}
+
+#list_reporte_estadistica
+{
+	display: none;	
 }
 
 #oculto

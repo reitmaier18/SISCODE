@@ -275,6 +275,32 @@ function display_expe_list(){
       });      
 }
 
+function search_expe_list(){
+    var dato = document.getElementById('search_expe').value;
+    var reg = document.getElementById('l_expediente');
+    num = dato.substring(0,1);
+  if (dato=='') {
+    display_expe_list();
+  }else{
+    // Recorremos todas las filas con contenido de la tabla
+        for (let i = 0; i < reg.rows.length; i++) {
+          var fila = i+1;              
+          var celdas = reg.rows[i].getElementsByTagName('td');
+            for (let j = 1; j < celdas.length-4; j++) {
+              var dat=celdas[j].innerHTML;
+              if (dat==dato) {
+                $("#expe"+fila).show();
+              }if(dato==dat.substring(0, dato.length)){
+                $("#expe"+fila).show();
+              }else{
+                $("#expe"+fila).hide();
+                console.log(dat);
+              }                
+            }
+        }
+  }
+}
+
 function seleccion_expe_list(){
     $("table tbody tr").click(function() {
         var num = $(this).find("td:eq(1)").text();
@@ -323,9 +349,9 @@ function gestionar_solicitud(){
         var pieza = $(this).find("td:eq(6)").text();
         var ubicacion = $(this).find("td:eq(7)").text();
         $.ajax({
-            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'ubicacion='+ubicacion,
+            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'&ubicacion='+ubicacion,
         }).done(function(respuesta){
-            
+            console.log(respuesta);
             if (respuesta==1) {
                 $("#mensaje").modal("show");
                 $("#mensaje_text").html('Solicitud actualizada');
@@ -340,6 +366,29 @@ function gestionar_solicitud(){
     });   
 }
 
+function cancelar_solicitud(){
+    $("table tbody tr").click(function() {
+        var id = $(this).find("td:eq(1)").text();
+        var expediente = $(this).find("td:eq(5)").text();
+        var pieza = $(this).find("td:eq(6)").text();
+        var ubicacion = $(this).find("td:eq(7)").text();
+        $.ajax({
+            url:'./../Controlador/cancelar_solicitud.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'&ubicacion='+ubicacion,
+        }).done(function(respuesta){
+            
+            if (respuesta==1) {
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Solicitud cancelada');
+                list_solicitud();
+            }else{
+                $("#mensaje").modal("show");
+                $("#mensaje_text").html('Surgió un error en la acción');
+                list_solicitud();
+            }
+
+        });       
+    });      
+}
 
 
 //funciones para el paginado del log del sistema
@@ -785,3 +834,11 @@ function list_rep_exp(){
 function delete_pages_rep_exp(){
     $('#act_rep_exp').html('');
 }
+
+//Buscador de expedientes modal
+$("#search_expe").on('keyup', function (e) {
+  var keycode = e.keyCode || e.which;
+    if (keycode == 13) {
+        search_expe_list();
+    }
+});

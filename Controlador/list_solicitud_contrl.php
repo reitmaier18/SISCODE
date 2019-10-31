@@ -84,7 +84,7 @@
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
 					echo "<td>".$dat[$i]['ubicacion']."</td>";
-					switch ($data[$i]['estatus']) {
+					switch ($dat[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
 							echo "<td></td>";
@@ -152,7 +152,7 @@
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
 					echo "<td>".$dat[$i]['ubicacion']."</td>";
-					switch ($data[$i]['estatus']) {
+					switch ($dat[$i]['estatus']) {
 						case '1':
 							echo "<td>Aprobado</td>";
 							echo "<td><i class='img-table-acceptar' title='Gestionar traslado' onclick='gestionar_solicitud();'></i></td>";
@@ -210,20 +210,20 @@
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
 					echo "<td>".$dat[$i]['ubicacion']."</td>";
-					switch ($data[$i]['estatus']) {
+					switch ($dat[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
-							echo "<td><i class='img-table-acceptar' title='Aprobar prestamo' onclick='gestionar_solicitud();'></i>  <i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-acceptar' title='Aprobar prestamo' onclick='gestionar_solicitud();'></i>  <i class='img-table-cancelar' title='Cancelar solicitud' onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '1':
 							echo "<td>Aprobado</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud' onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '2':
 							echo "<td>Tramitando</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;	
 					}
@@ -244,17 +244,17 @@
 					switch ($data[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
-							echo "<td><i class='img-table-acceptar' title='Aprobar prestamo' onclick='gestionar_solicitud();'></i>  <i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-acceptar' title='Aprobar prestamo' onclick='gestionar_solicitud();'></i>  <i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '1':
 							echo "<td>Aprobado</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '2':
 							echo "<td>Tramitando</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;	
 					}
@@ -280,17 +280,17 @@
 					switch ($data[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '1':
 							echo "<td>Aprobado</td>";
-							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud' oclick='gestionar_solicitud();'></i></td>";
+							echo "<td><i class='img-table-cancelar' title='Cancelar solicitud' onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;
 						case '2':
 							echo "<td>Tramitando</td>";
-							echo "<td><i class='img-table-acceptar' title='Recibir prestamo' onclick='gestionar_solicitud();'></i> <i class='img-table-cancelar' title='Cancelar solicitud'></i></td>";
+							echo "<td><i class='img-table-acceptar' title='Recibir prestamo' onclick='gestionar_solicitud();'></i> <i class='img-table-cancelar' title='Cancelar solicitud'  onclick='cancelar_solicitud();'></i></td>";
 							echo "</tr>";
 							break;	
 					}

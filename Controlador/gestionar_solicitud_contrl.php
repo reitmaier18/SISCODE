@@ -38,11 +38,12 @@
 		case 'Juez':
 			$action=$solicitud->recibir_solicitud($_GET['n']);
 			if ($action==1) {
-				$expediente->update_pieza_ubicacion($_GET['expediente'], $_GET['pieza'], $_GET['ubicacion']);
+				$a=$expediente->update_pieza_ubicacion($_GET['expediente'], $_GET['pieza'], $_GET['ubicacion']);
 				if ($a=='True') {
 					echo $action;
+					
 				}else{
-					echo 0;
+					var_dump($a);
 				}
 			}else{
 				echo $action;

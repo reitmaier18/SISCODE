@@ -7,6 +7,7 @@ function mostrar_mod_user_a() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //alert("Modulo de registro de usuario");
     //document.getElementsByClassName('inicio').style.display="block";
 }
@@ -20,6 +21,7 @@ function mostrar_mod_user_b() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //alert("Modulo de actualización de usuario");
     //document.getElementsByClassName('inicio').style.display="block";
 }
@@ -34,6 +36,7 @@ function mostrar_mod_inicio() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
 }
 
@@ -46,6 +49,7 @@ function mostrar_mod_expediente_a() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
     /*$.ajax({
         url:'./../Controlador/listar_tribunales_contrl.php',
@@ -103,6 +107,7 @@ function mostrar_mod_expediente_b() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
 }
 
@@ -115,6 +120,7 @@ function mostrar_mod_solicitud_list() {
     document.getElementById('solicitud_list').style.display="block";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     //document.getElementsByClassName('inicio').style.display="block";
     list_solicitud();   
     
@@ -129,6 +135,7 @@ function mostrar_mod_log_sistema() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="block";
     document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="none";
     list_log();
     
 }
@@ -142,17 +149,50 @@ function mostrar_mod_reporte_estadistico() {
     document.getElementById('solicitud_list').style.display="none";
     document.getElementById('log_sistema').style.display="none";
     document.getElementById('reporte_estadistico').style.display="block";
+    document.getElementById('inventario').style.display="none";
     list_log();
 }
 
 function mostrar_estadistica_expediente(){
     document.getElementById('reporte_solicitud').style.display="none";
     document.getElementById('reporte_expediente').style.display="block";
+    document.getElementById('reporte_estadistica').style.display="none";
 }
 
 function mostrar_estadistica_solicitud(){
     document.getElementById('reporte_solicitud').style.display="block";
     document.getElementById('reporte_expediente').style.display="none";
+    document.getElementById('reporte_estadistica').style.display="none";
+}
+
+function mostrar_estadistica(){
+    document.getElementById('reporte_solicitud').style.display="none";
+    document.getElementById('reporte_expediente').style.display="none";
+    document.getElementById('reporte_estadistica').style.display="block";
+}
+
+function mostrar_inventario(){
+    document.getElementById('inicio').style.display="none";
+    document.getElementById('user_a').style.display="none";
+    document.getElementById('user_b').style.display="none";
+    document.getElementById('expediente_a').style.display="none";
+    document.getElementById('expediente_b').style.display="none";
+    document.getElementById('solicitud_list').style.display="none";
+    document.getElementById('log_sistema').style.display="none";
+    document.getElementById('reporte_estadistico').style.display="none";
+    document.getElementById('inventario').style.display="block";
+    list_inventario();
+    list_exp_est();
+}
+
+function mostrar_inv(){
+    document.getElementById('list_inventario').style.display="block";
+    document.getElementById('list_rep_exp_est').style.display="none";   
+}
+
+function mostrar_exp(){
+    document.getElementById('list_inventario').style.display="none";
+    document.getElementById('list_rep_exp_est').style.display="block";      
 }
 
 //Jquery
@@ -259,6 +299,18 @@ function enviar_form_regis_expe(){
         //var datos = eval(respuesta);
         $('#form_regis_expe')[0].reset();
     });
+}
+
+function habilitar_expediente_asociado(){
+    var question = document.getElementById('question').checked;
+    if(question){
+      $('#n_asociado').show();
+      document.getElementById('numero_expediente_asociado').disabled=false;
+      
+    }else{
+      $('#n_asociado').hide();
+      document.getElementById('numero_expediente_asociado').disabled=true;
+    }
 }
 
 /*
@@ -431,6 +483,7 @@ function update_expe(){
        enviar_form_consul_expe();
     });
 }
+
 
 
 //funcion que mide el tiempo de inactividad de un usuario en el sistema para poder sacarlo del mismo, el intervalo de tiempo es de 10min
@@ -636,6 +689,36 @@ function display_expe_list(){
       });      
 }
 
+function search_expe_list(){
+
+  var dato = document.getElementById('search_expe').value;
+  var reg = document.getElementById('l_expediente');
+  alert(dato);
+  num = dato.substring(0,1);
+  if (dato=='') {
+    
+  }else{
+    // Recorremos todas las filas con contenido de la tabla
+        for (let i = 0; i < reg.rows.length; i++) {
+          var fila = i+1;              
+          var celdas = reg.rows[i].getElementsByTagName('td');
+            for (let j = 1; j < celdas.length-5; j++) {
+              var dat=celdas[j].innerHTML;
+              if (dat==dato) {
+                $("#log"+fila).show();
+              }if(dato==dat.substring(0, dato.length)){
+                $("#log"+fila).show();
+              }else{
+                $("#log"+fila).hide();
+              }                
+            }
+          
+        }
+  }
+  
+
+}
+
 function seleccion_expe_list(){
     $("table tbody tr").click(function() {
         var num = $(this).find("td:eq(1)").text();
@@ -734,42 +817,47 @@ function mostrar_pre_log(){
 }
 
 function search_log(){
-  var dato = document.getElementById('q').value;
+  var dato = document.getElementById('search_log').value;
   var reg = document.getElementById('l_log');
   num = dato.substring(0,1);
-  
-  // Recorremos todas las filas con contenido de la tabla
-    for (let i = 0; i < reg.rows.length; i++) {
-      var fila = i+1;              
-      var celdas = reg.rows[i].getElementsByTagName('td');
-      if (num/1) {
-        for (let j = 1; j < celdas.length-2; j++) {
-          var dat=celdas[j].innerHTML;
-          //console.log(dat);
-          if (dat==dato) {
-            $("#log"+fila).show();
-          }else{
-            if(dato==dat.substring(0, dato.length)){
-              $("#log"+fila).show();
-            }else{
-              $("#log"+fila).hide();
+  if (dato=='') {
+    list_log();
+  }else{
+    // Recorremos todas las filas con contenido de la tabla
+        for (let i = 0; i < reg.rows.length; i++) {
+          var fila = i+1;              
+          var celdas = reg.rows[i].getElementsByTagName('td');
+          if (num/1) {
+            for (let j = 1; j < celdas.length-1; j++) {
+              var dat=celdas[j].innerHTML;
+              //console.log(dat);
+              console.log(dat);
+              if (dat==dato) {
+                $("#log"+fila).show();
+              }else{
+                if(dato==dat.substring(0, dato.length)){
+                  $("#log"+fila).show();
+                }else{
+                  $("#log"+fila).hide();
+                }
+              }
+            }
+          }
+          else{
+            for (let j = 1; j < celdas.length-2; j++) {
+              var dat=celdas[j].innerHTML;
+              if (dat==dato) {
+                $("#log"+fila).show();
+              }if(dato==dat.substring(0, dato.length)){
+                $("#log"+fila).show();
+              }else{
+                $("#log"+fila).hide();
+              }                
             }
           }
         }
-      }
-      else{
-        for (let j = 1; j < celdas.length-1; j++) {
-          var dat=celdas[j].innerHTML;
-          if (dat==dato) {
-            $("#log"+fila).show();
-          }if(dato==dat.substring(0, dato.length)){
-            $("#log"+fila).show();
-          }else{
-            $("#log"+fila).hide();
-          }                
-        }
-      }
-    }
+  }
+  
 }
 
 function list_log(){
@@ -820,39 +908,38 @@ function imprimir_log(){
     window.location="../Reportes/reporte_log.php"; 
 }
 
+function imprimir_inventario(){
+    window.location="../Reportes/reporte_inventario.php";    
+}
+
+function imprimir_reporte_expediente_estado(){
+    window.location="../Reportes/reporte_expediente_estado.php";    
+}
+
 function imprimir_reporte_solicitud(){
     var desde = $('#desde_solicitud').val();
     var hasta = $('#hasta_solicitud').val();
-    var url = "../Reportes/reporte_solicitud.php?desde="+desde+"&hasta="+hasta; 
-    //alert(url);
+    //var url = "../Reportes/reporte_solicitud.php?desde="+desde+"&hasta="+hasta; 
     window.location="../Reportes/reporte_solicitud.php?desde="+desde+"&hasta="+hasta; 
+}
 
+function imprimir_reporte_estadistica(){
+    var desde = $('#desde_estadistica').val();
+    var hasta = $('#hasta_estadistica').val();
+    window.location="../Reportes/reporte_estadistica.php?desde="+desde+"&hasta="+hasta; 
 }
 
 function imprimir_reporte_expediente(){
     var desde = $('#desde_expediente').val();
     var hasta = $('#hasta_expediente').val();
-    var url = "../Reportes/reporte_expediente.php?desde="+desde+"&hasta="+hasta; 
-    //alert(url);
+    //var url = "../Reportes/reporte_expediente.php?desde="+desde+"&hasta="+hasta; 
     window.location="../Reportes/reporte_expediente.php?desde="+desde+"&hasta="+hasta; 
-
 }
 
 function reporte_solicitud(){
-    //var dato = $('#form_rep_solicitud').serialize();
     $('#form_rep_solicitud').hide();
     $('#list_reporte_solicitud').show();
     list_rep_sol();
-    /*
-    $.ajax({
-        url:'./../Controlador/list_reporte_solicitud_contrl.php',
-        type:'POST',
-        data: dato,
-    }).done(function(respuesta){
-        $("#l_reporte_solicitud").html(respuesta);
-        
-    });
-    */      
 }
 
 function reiniciar_reporte_solicitud(){
@@ -861,25 +948,35 @@ function reiniciar_reporte_solicitud(){
 }
 
 function reporte_expediente(){
-    //var dato = $('#form_rep_expediente').serialize();
     $('#form_rep_expediente').hide();
     $('#list_reporte_expediente').show();
     list_rep_exp();
-    /*
-    $.ajax({
-        url:'./../Controlador/list_reporte_expediente_contrl.php',
-        type:'POST',
-        data: dato,
-    }).done(function(respuesta){
-        $("#l_reporte_expediente").html(respuesta);
-        
-    });
-    */      
 }
 
 function reiniciar_reporte_expediente(){
     $('#form_rep_expediente').show();
     $('#list_reporte_expediente').hide();
+}
+
+function reporte_estadistica(){
+    $('#form_rep_estadistica').hide();
+    $('#list_reporte_estadistica').show();
+    var dato = $('#form_rep_estadistica').serialize();
+    $.ajax({
+        url:'./../Controlador/list_reporte_estadistica_contrl.php',
+        type:'POST',
+        data: dato,
+    }).done(function(respuesta){
+        $('#l_reporte_estadistica').html(respuesta);
+        $('#form_rep_estadistica').hide();
+        $('#list_reporte_estadistica').show();
+        
+    });
+}
+
+function reiniciar_reporte_estadistica(){
+    $('#form_rep_estadistica').show();
+    $('#list_reporte_estadistica').hide();   
 }
 
 //paginado de las solicitudes/////////////////////////////////////////////////////////////
@@ -1137,4 +1234,211 @@ function delete_pages_rep_exp(){
 
 function mostrar_grafica(){
     $('#grafica_modal').modal('show');
+    var dato = $('#form_rep_estadistica').serialize();
+            $.ajax({
+                url:'./../Controlador/grafica_contrl.php',
+                type:'POST',
+                data: dato,
+            }).done(function(respuesta){
+                var dat = eval(respuesta);
+                var expediente = dat[0];
+                var solicitud = dat[1];
+                grafica(expediente, solicitud);
+            });
+}
+
+//Buscador de expedientes segundo formulario
+$("#search").on('keyup', function (e) {
+  var keycode = e.keyCode || e.which;
+    if (keycode == 13) {
+        enviar_form_consul_expe();
+    }
+});
+
+//Buscador del log
+$("#search_log").on('keyup', function (e) {
+  var keycode = e.keyCode || e.which;
+    if (keycode == 13) {
+        search_log();
+    }
+});
+
+//Buscador del log
+$("#search_expe").on('keyup', function (e) {
+  var keycode = e.keyCode || e.which;
+    if (keycode == 13) {
+        search_expe_list();
+    }
+});
+
+//inventario
+function mostrar_nex_inventario(){
+  x = document.getElementById('act_inventario').value;    
+  x = parseInt(x)+1;
+  if(x>pages){
+    x=x-1;
+  }
+  document.getElementById('act_inventario').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index <= y+1; index++){
+    $("#inventario"+index).hide();
+    //console.log(index);
+  }
+  for (let index = y; index < element; index++){
+    $("#inventario"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#inventario"+index).hide();
+  }
+}
+
+function mostrar_pre_inventario(){
+  x = document.getElementById('act_inventario').value;    
+  x = parseInt(x)-1;
+  if(x==0){
+    x=x+1;
+  }
+  document.getElementById('act_inventario').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index < y; index++){
+    $("#inventario"+index).hide();
+  }
+  for (let index = element; index > y; index--){
+    $("#inventario"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#inventario"+index).hide();
+  }
+}
+
+function list_inventario(){
+  $.ajax({
+        url:'./../Controlador/list_inventario_contrl.php',
+        type:'POST',
+        data: "",
+    }).done(function(respuesta){
+    $('#l_inventario').html(respuesta);
+    table = document.getElementById('l_inventario').rows.length;
+    group = table/4;
+    pages;
+    if(group % 1 == 0){
+      pages = group;
+    }else{
+      x = group % 1;
+      y = 1 - x;
+        pages = group+y;
+    }
+    x = document.getElementById('act_inventario').value;
+    
+    delete_pages_inventario();
+    for (let index = 1; index <= pages; index++) {
+      //console.log(index);
+      var option = document.createElement("option");
+      option.setAttribute('value',index);
+      $(option).html(index);
+      $(option).appendTo("#act_inventario");
+    }
+    document.getElementById('act_inventario').value=x;
+    element = 4*x;
+    y = element-4;
+    for (let index = table; index > element; index--) {
+      $("#inventario"+index).hide();
+      
+    }
+    for (let index = 1; index <= y; index++) {
+      $("#inventario"+index).hide();
+    }
+  });
+}
+
+function delete_pages_inventario(){
+    $('#act_inventario').html('');
+}
+
+//reporte de cantidad de expedientes por estados
+function mostrar_nex_exp_est(){
+  x = document.getElementById('act_exp_est').value;    
+  x = parseInt(x)+1;
+  if(x>pages){
+    x=x-1;
+  }
+  document.getElementById('act_exp_est').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index <= y+1; index++){
+    $("#exp_est"+index).hide();
+    //console.log(index);
+  }
+  for (let index = y; index < element; index++){
+    $("#exp_est"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#exp_est"+index).hide();
+  }
+}
+
+function mostrar_pre_exp_est(){
+  x = document.getElementById('act_inventario').value;    
+  x = parseInt(x)-1;
+  if(x==0){
+    x=x+1;
+  }
+  document.getElementById('act_inventario').value=x;
+  element = 4*x;
+  y=element-4;
+  for (let index = 1; index < y; index++){
+    $("#exp_est"+index).hide();
+  }
+  for (let index = element; index > y; index--){
+    $("#exp_est"+index).show();
+  }
+  for (let index = table; index > element; index--) {
+    $("#exp_est"+index).hide();
+  }
+}
+
+function list_exp_est(){
+  $.ajax({
+        url:'./../Controlador/reporte_expediente_estado_contrl.php',
+        type:'POST',
+        data: "",
+    }).done(function(respuesta){
+    $('#l_rep_exp_est').html(respuesta);
+    table = document.getElementById('l_rep_exp_est').rows.length;
+    group = table/4;
+    pages;
+    if(group % 1 == 0){
+      pages = group;
+    }else{
+      x = group % 1;
+      y = 1 - x;
+        pages = group+y;
+    }
+    x = document.getElementById('act_exp_est').value;
+    
+    delete_pages_exp_est();
+    for (let index = 1; index <= pages; index++) {
+      //console.log(index);
+      var option = document.createElement("option");
+      option.setAttribute('value',index);
+      $(option).html(index);
+      $(option).appendTo("#act_exp_est");
+    }
+    document.getElementById('act_exp_est').value=x;
+    element = 4*x;
+    y = element-4;
+    for (let index = table; index > element; index--) {
+      $("#exp_est"+index).hide();
+      
+    }
+    for (let index = 1; index <= y; index++) {
+      $("#exp_est"+index).hide();
+    }
+  });
+}
+
+function delete_pages_exp_est(){
+    $('#act_exp_est').html('');
 }
