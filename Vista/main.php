@@ -2,19 +2,19 @@
     session_start();
     switch ($_SESSION['rol']) {
         case 'Administrador':
-            require 'v/admin.php';    
+            require 'view/admin.php';    
         break;    
         case 'Archivista':    
-            require 'v/archivista.php';    
+            require 'view/archivista.php';    
         break;    
         case 'Alguacil':    
-            require 'v/alguacil.php';   
+            require 'view/alguacil.php';   
         break;    
         case 'Jefe de archivo':    
-            require 'v/archivista.php';        
+            require 'view/archivista.php';        
         break;    
         case 'Juez':    
-            require 'v/juez.php';             
+            require 'view/juez.php';             
 
         break;
         default:

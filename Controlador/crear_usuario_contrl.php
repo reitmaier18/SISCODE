@@ -15,20 +15,16 @@
         case 0:
             $log = "Error al crear usuario";
             $sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
-            echo json_encode('El usuario no fue creado, información de identificación duplicada');
+            echo 0;
             break;
-        
         case 1:
             $log = "Creo el usuario: ".$_POST['usuario'];
             $sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
-            echo json_encode('El usuario fue creado exitosamente');
-            break;
-            
-        default:
-            # code...
+            echo 1;
+            echo 'El usuario fue creado exitosamente';
             break;
     }
     
-    //echo $resp;
-    //header('Location:../Vista/main.php');
+    
+    
 ?>
