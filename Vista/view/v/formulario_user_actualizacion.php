@@ -12,13 +12,13 @@
             </div>
             <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="ci" id="g" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="ci" id="g" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="g">Cedula del funcionario</label>                            
             </div>
         </div>
         <div class="input-group">
             <div class="md-form col-md-2 offset-md-3">
-                <button type="button" class="btn btn-primary" onclick="enviar_form_act_user();"> SIGUIENTE </button>    
+                <button type="button" class="btn btn-primary" onmouseover="val_formulario('#form_actua_user')" onclick="enviar_form_act_user();"> SIGUIENTE </button>    
             </div> 
             <div class="md-form col-md-2 offset-md-1 ">
                 <input type="reset" class="btn btn-danger" value="Cancelar">
@@ -122,7 +122,7 @@
                 </div>           
                 <div class="input-group">
                     <div class="md-form text-center">
-                        <input type="button" class="btn btn-primary text-center" value="Actualizar" onclick="enviar_form_act_user_final();">    
+                        <input type="button" class="btn btn-primary text-center" onmouseover="val_formulario('#form_actua_user_final');" value="Actualizar" onclick="enviar_form_act_user_final();">    
                     </div> 
                     
                 </div>
@@ -201,4 +201,6 @@ function enviar_form_act_user_final() {
         $('#form_actua_user')[0].reset();
     });
 }
+
+
 </script>

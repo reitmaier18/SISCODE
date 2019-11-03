@@ -27,7 +27,7 @@
                 <label for="c">Cedula del funcionario</label>                            
             </div>
             <div class="md-form col-md-4">
-                <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="rol">
+                <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="rol" id="reg_rol">
                     <option disabled selected>Roll de usuario</option>
                     <option value="1">Administrador</option>
                     <option value="2">Archivista</option>
@@ -40,18 +40,18 @@
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="usuario" id="d" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="usuario" id="d" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="d">Usuario del funcionario</label>                            
             </div>
             <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="password" name="password" id="f" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="password" name="password" id="f" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="f">Password del funcionario</label>                            
             </div>
         </div>
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-4" id="textbox1">
-                <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="ubicacion">
+                <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="ubicacion" id="reg_user_ubicacion">
                     <option disabled selected>Ubicación</option>
                     <option value="1">Tribunal 1</option>
                     <option value="2">Tribunal 2</option>
@@ -68,7 +68,7 @@
         </div>
         <div class="input-group">
             <div class="md-form col-md-2 offset-md-3">
-                <input type="button" class="btn btn-primary" value="Registrar" id="reg_user" onmouseover="val_cedula_reg_user();" onclick="enviar_form_reg_user();">    
+                <input type="button" class="btn btn-primary" value="Registrar" id="reg_user" onmouseover="val_formulario('#form_reg_user');" onclick="enviar_form_reg_user();">    
             </div> 
             <div class="md-form col-md-2 offset-md-1 ">
                 <input type="reset" class="btn btn-danger" value="Cancelar">
@@ -111,12 +111,5 @@ function enviar_form_reg_user() {
 /*
 * función para validar que la cedula del usuario a registrar no este vacia
 */
-function val_cedula_reg_user(){
-    var dato = $('#c').val();
-    if (dato=="") {
-        $("#mensaje").modal("show");
-        $("#mensaje_text").html('El campo cedula esta vacio');
-       
-    }
-}
+
 </script>

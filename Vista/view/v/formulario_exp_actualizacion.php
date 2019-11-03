@@ -177,7 +177,7 @@
                             </div>
                             <div class="input-group">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="button" class="btn btn-primary" onclick="update_expe();" value="Actualizar">    
+                                    <input type="button" class="btn btn-primary" onmouseover="val_formulario('#form_actualizar_expediente');" onclick="update_expe();" value="Actualizar">    
                                 </div> 
                             </div>
                 </form>

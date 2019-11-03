@@ -80,7 +80,7 @@
                         
                     </div>
 
-                    <center><label class="btn btn-primary" onclick="registrar_solicitud_int();">registrar</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_interna');" onclick="registrar_solicitud_int();">registrar</label></center>
                 </form>
                 <?php if ($_SESSION['rol']=='Archivista') { ?>
                 <form class="col-md-12 oc" id="form_sol_externa">
@@ -126,7 +126,7 @@
                         </div>                                
                         
                     </div>
-                    <center><label class="btn btn-primary" onclick="registrar_solicitud_ext();">externa</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_externa');" onclick="registrar_solicitud_ext();">externa</label></center>
                 </form>
             <?php } ?>
             

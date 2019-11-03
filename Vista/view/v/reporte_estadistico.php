@@ -36,7 +36,7 @@
                     <label for="b">Fecha de cierre</label>                            
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    <center><label class="btn btn-primary" onclick="reporte_solicitud();">Generar reporte</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_rep_solicitud');" onclick="reporte_solicitud();">Generar reporte</label></center>
                                                 
                 </div>
             </div>
@@ -98,7 +98,7 @@
                     <label for="b">Fecha de cierre</label>                            
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    <center><label class="btn btn-primary" onclick="reporte_expediente();">Generar reporte</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_rep_expediente');" onclick="reporte_expediente();">Generar reporte</label></center>
                                                 
                 </div>
             </div>
@@ -160,7 +160,7 @@
                     <label for="hasta_estadistica">Fecha de cierre</label>                            
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    <center><label class="btn btn-primary" onclick="reporte_estadistica();">Generar reporte</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_rep_estadistica');" onclick="reporte_estadistica();">Generar reporte</label></center>
                                                 
                 </div>
                 

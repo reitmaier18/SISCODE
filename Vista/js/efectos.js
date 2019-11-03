@@ -21,7 +21,18 @@ function incremento_tiempo() {
         window.location="../Controlador/cerrar_session_contrl.php"; 
     } 
 }
-
+/*
+* función para validar todos los campos del formulario
+*/
+function val_formulario(formulario){
+    var dato = $(formulario).serializeArray();
+    for (index = 0; index < dato.length; ++index) { 
+        if (dato[index].value.length == 0) { 
+            $("#mensaje").modal("show");
+            $("#mensaje_text").html('Es necesario que llene todo los campos del formulario');
+        } 
+    }
+}
 
 
 

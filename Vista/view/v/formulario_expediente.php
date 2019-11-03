@@ -103,7 +103,7 @@
         </div>                            
         <div class="input-group">
             <div class="md-form col-md-2 offset-md-3">
-                <input type="button" class="btn btn-primary" onclick="enviar_form_regis_expe();" value="Registrar">    
+                <input type="button" class="btn btn-primary" onmouseover="val_formulario('#form_regis_expe');" onclick="enviar_form_regis_expe();" value="Registrar">    
             </div> 
             <div class="md-form col-md-2 offset-md-1 ">
                 <input type="reset" class="btn btn-danger" value="Cancelar">
