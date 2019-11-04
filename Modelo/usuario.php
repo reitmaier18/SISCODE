@@ -51,11 +51,11 @@
         /*
         * Función para validar datos del usuario
         */
-        function validar_datos($nac, $ci){
-            $sql = ("select nombre, apellido, nacionalidad, cedula from sisco.usuario where nacionalidad = '$nac' and cedula = '$ci'");
+        function validar_datos($nac, $ci, $usuario){
+            $sql = ("select nombre, apellido, nacionalidad, cedula, usuario from sisco.usuario where nacionalidad = '$nac' and cedula = '$ci' or usuario = '$usuario'");
             $query=pg_query($sql);
             $fila=pg_fetch_array($query, 0, PGSQL_NUM);
-            if ($nac == $fila[2] and $ci == $fila[3]) {
+            if (($nac == $fila[2] and $ci == $fila[3]) || $usuario == $fila[4]) {
                 return 0;
             }else{
                 return 1;
@@ -86,7 +86,7 @@
         function crear_usuario($nombre, $apellido, $nac, $ci, $rol, $usuario, $password, $ubicacion){
             $user = base64_encode($usuario);
             $passwd = base64_encode($password);
-            $d = $this->validar_datos($nac, $ci);
+            $d = $this->validar_datos($nac, $ci, $user);
             if ($d == 1) {
                 $sql = ("insert into sisco.usuario (rol_id, nombre, apellido, nacionalidad, cedula, usuario, password, estatus, ubicacion_id) values ('$rol', '$nombre', '$apellido', '$nac', '$ci', '$user', '$passwd', 0, '$ubicacion')");
                 $query=pg_query($sql);

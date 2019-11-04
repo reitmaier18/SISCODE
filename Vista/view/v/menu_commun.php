@@ -33,7 +33,7 @@
                     <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REPORTES </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" onclick="mostrar_mod_reporte_estadistico();">Estadistica</a>
+                            <a class="dropdown-item" onclick="mostrar_mod_reporte_estadistico();">Estadística</a>
                             <a class="dropdown-item" onclick="mostrar_inventario();">Inventario</a><?php if ($_SESSION['rol']=='Administrador') {?>
                             <a class="dropdown-item" onclick="mostrar_mod_log_sistema();">Log del sistema</a><?php } ?>
                         </div>

@@ -1,6 +1,6 @@
 <div class="col-md-10" id="user_b">
     <h2 class="h2-responsive font-weight-bold text-center my-5">Actualizar Usuario</h2>
-    <p class="text-center">Por favor indique el numero de cedula del usuario que desea actualizar</p>
+    <p class="text-center">Por favor indique el número de cédula del usuario que desea actualizar</p>
     <form action="#" method="post" class="col-md-12" id="form_actua_user">
         <div class="input-group">
             <div class="md-form col-md-2 offset-md-3">
@@ -12,8 +12,8 @@
             </div>
             <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="ci" id="g" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <label for="g">Cedula del funcionario</label>                            
+                <input type="text" name="ci" id="g" class="form-control validanumericos" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <label for="g">Cédula del funcionario</label>                            
             </div>
         </div>
         <div class="input-group">
@@ -43,12 +43,12 @@
                 <div class="input-group">
                     <div class="textbox col-md-4 offset-md-1" id="textbox1">
                         <label for="u_a_nombre" data-error="wrong" data-success="right">Nombre del funcionario</label>                            
-                        <input type="text" name="nombre" id="u_a_nombre" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <input type="text" name="nombre" id="u_a_nombre" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         
                     </div>
                     <div class="textbox col-md-4 offset-md-2" id="textbox1">
                         <label for="u_a_apellido" data-error="wrong" data-success="right">Apellido del funcionario</label>                            
-                        <input type="text" name="apellido" id="u_a_apellido" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <input type="text" name="apellido" id="u_a_apellido" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                         </select>
                     </div> 
                     <div class="textbox col-md-4 offset-md-0" id="textbox1">
-                        <label for="u_a_ci">Cedula del funcionario</label>                            
-                        <input type="text" name="ci" id="u_a_ci" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <label for="u_a_ci">Cédula del funcionario</label>                            
+                        <input type="text" name="ci" id="u_a_ci" class="form-control validanumericos" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         
                     </div>
                     <div class="col-md-4">
@@ -81,12 +81,12 @@
                 <div class="input-group">
                     <div class="textbox col-md-4 offset-md-1" id="textbox1">
                         <label for="u_a_usuario" data-error="wrong" data-success="right">Usuario del funcionario</label>                            
-                        <input type="text" name="usuario" id="u_a_usuario" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <input type="text" name="usuario" id="u_a_usuario" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         
                     </div>
                     <div class="textbox col-md-4 offset-md-2" id="textbox1">
                         <label for="u_a_password" data-error="wrong" data-success="right">Password del funcionario</label>                            
-                        <input type="password" name="password" id="u_a_password" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                        <input type="password" name="password" id="u_a_password" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         
                     </div>
                 </div>
@@ -112,9 +112,9 @@
                             <option value="4">Corte 1</option>
                             <option value="5">Corte 2</option>
                             <option value="6">Corte 3</option>
-                            <option value="7">Sustanciacion</option>
-                            <option value="8">Secretaria del tribunal</option>
-                            <option value="9">Secretaria de la corte</option>
+                            <option value="7">Sustanciación</option>
+                            <option value="8">Secretaría del tribunal</option>
+                            <option value="9">Secretaría de la corte</option>
                             <option value="10">Archivo</option>
                         </select>                            
                     </div>

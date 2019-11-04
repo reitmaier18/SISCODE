@@ -9,9 +9,11 @@
     $tribunal = new tribunal();
     $data=$expediente->list_expediente();
     $a=count($data);
+    $fila=0;
     for ($i=0; $i < $a; $i++) { 
-    	echo "<tr onclick='seleccion_expe_list();' id='expe".($i+1)."'>";
-    	echo "<td>".($i+1)."</td>";
+        $fila++;
+    	echo "<tr onclick='seleccion_expe_list();' id='expe".$fila."'>";
+    	echo "<td>".$fila."</td>";
     	echo "<td>".$data[$i]['numero_expediente']."</td>";
     	if ($data[$i]['nacionalidad']==1) {
     		echo "<td>V-".$data[$i]['cedula_acusado']."</td>";

@@ -2,9 +2,9 @@
     <h2 class="h2-responsive font-weight-bold text-center my-5">Log del sistema</h2>
     <div class="col-md-4">
         <div class="md-form">
-            <i class="prefix" onclick="search_log();"><img src="img/icon6.png"></i>
-            <label for="search_log">Buscar...</label>
-            <input type="text" name="search_log" id="search_log" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+            <i class="prefix" onclick="list_log();"><img src="img/icon6.png"></i>
+            <label for="search_log">Usuario...</label>
+            <input type="text" name="search_log" id="search_log" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase(); onKeyUp(event, 1);" required="true">
         </div>
     </div>
     <div>
@@ -40,7 +40,7 @@
                 </tr>
             </tfoot>
         </table>
-        <center><button class="btn btn-primary" onclick="imprimir_log()">Imprimir PDF</button></center>
+        <center><button class="btn btn-primary oc" id="pdf_log" onclick="imprimir_log()">Imprimir PDF</button></center>
         <br>
     </div>
 </div>
@@ -58,8 +58,6 @@ function mostrar_mod_log_sistema() {
     document.getElementById('inventario').style.display="none";
     <?php } ?>
     document.getElementById('solicitud_list').style.display="none";
-    list_log();
-    
 }
 
 //funciones para el paginado del log del sistema
@@ -104,88 +102,60 @@ function mostrar_pre_log(){
   }
 }
 
-function search_log(){
+function list_log(){
   var dato = document.getElementById('search_log').value;
-  var reg = document.getElementById('l_log');
-  num = dato.substring(0,1);
   if (dato=='') {
-    list_log();
+    $("#mensaje").modal("show");
+    $("#mensaje_text").html('Campo de busqueda de log vacio');
+    $("#l_log").html('');
+    delete_pages_log();
+    for (let index = 1; index <= 1; index++) {
+        var option = document.createElement("option");
+        option.setAttribute('value',index);
+        $(option).html(index);
+        $(option).appendTo("#act_log");
+      }
   }else{
-    // Recorremos todas las filas con contenido de la tabla
-        for (let i = 0; i < reg.rows.length; i++) {
-          var fila = i+1;              
-          var celdas = reg.rows[i].getElementsByTagName('td');
-          if (num/1) {
-            for (let j = 1; j < celdas.length-1; j++) {
-              var dat=celdas[j].innerHTML;
-              //console.log(dat);
-              console.log(dat);
-              if (dat==dato) {
-                $("#log"+fila).show();
-              }else{
-                if(dato==dat.substring(0, dato.length)){
-                  $("#log"+fila).show();
-                }else{
-                  $("#log"+fila).hide();
-                }
-              }
-            }
-          }
-          else{
-            for (let j = 1; j < celdas.length-2; j++) {
-              var dat=celdas[j].innerHTML;
-              if (dat==dato) {
-                $("#log"+fila).show();
-              }if(dato==dat.substring(0, dato.length)){
-                $("#log"+fila).show();
-              }else{
-                $("#log"+fila).hide();
-              }                
-            }
-          }
-        }
+      $.ajax({
+          url:'./../Controlador/list_log_accion.php',
+          type:'POST',
+          data: {dato:dato},
+      }).done(function(respuesta){
+      $("#l_log").html(respuesta);
+      $('#pdf_log').show();
+      table = document.getElementById('l_log').rows.length;
+      group = table/4;
+      pages;
+      if(group % 1 == 0){
+        pages = group;
+      }else{
+        x = group % 1;
+        y = 1 - x;
+          pages = group+y;
+      }
+      x = document.getElementById('act_log').value;
+      
+      delete_pages_log();
+      for (let index = 1; index <= pages; index++) {
+        //console.log(index);
+        var option = document.createElement("option");
+        option.setAttribute('value',index);
+        $(option).html(index);
+        $(option).appendTo("#act_log");
+      }
+      document.getElementById('act_log').value=x;
+      element = 4*x;
+      y = element-4;
+      for (let index = table; index > element; index--) {
+        $("#log"+index).hide();
+        
+      }
+      for (let index = 1; index <= y; index++) {
+        $("#log"+index).hide();
+      }
+    });  
   }
   
-}
-
-function list_log(){
-  $.ajax({
-        url:'./../Controlador/list_log_accion.php',
-        type:'POST',
-        data: '',
-    }).done(function(respuesta){
-    $("#l_log").html(respuesta);
-    table = document.getElementById('l_log').rows.length;
-    group = table/4;
-    pages;
-    if(group % 1 == 0){
-      pages = group;
-    }else{
-      x = group % 1;
-      y = 1 - x;
-        pages = group+y;
-    }
-    x = document.getElementById('act_log').value;
-    
-    delete_pages_log();
-    for (let index = 1; index <= pages; index++) {
-      //console.log(index);
-      var option = document.createElement("option");
-      option.setAttribute('value',index);
-      $(option).html(index);
-      $(option).appendTo("#act_log");
-    }
-    document.getElementById('act_log').value=x;
-    element = 4*x;
-    y = element-4;
-    for (let index = table; index > element; index--) {
-      $("#log"+index).hide();
-      
-    }
-    for (let index = 1; index <= y; index++) {
-      $("#log"+index).hide();
-    }
-  });
 }
 
 function delete_pages_log(){
@@ -193,15 +163,11 @@ function delete_pages_log(){
 }
 //termina paginado del log
 function imprimir_log(){
-    window.location="../Reportes/reporte_log.php"; 
+    var dato = document.getElementById('search_log').value; 
+    window.location="../Reportes/reporte_log.php?dato="+dato; 
 }
 
-//Buscador del log
-/*
-$("#search_log").on('keyup', function (e) {
-  var keycode = e.keyCode || e.which;
-    if (keycode == 13) {
-        search_log();
-    }
-});*/
+
+
+
 </script>

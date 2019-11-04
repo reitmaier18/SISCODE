@@ -23,7 +23,7 @@
 	$pdf->Cell(20, 6, '#', 1, 0, 'C', 1);
 	$pdf->Cell(30, 6, 'Fecha', 1, 0, 'C', 1);
 	$pdf->Cell(40, 6, 'Expediente', 1, 0, 'C', 1);
-	$pdf->Cell(30, 6, 'Cedula', 1, 0, 'C', 1);
+	$pdf->Cell(30, 6, utf8_decode('Cédula'), 1, 0, 'C', 1);
 	$pdf->Cell(50, 6, 'Nombre', 1, 0, 'C', 1);
 	$pdf->Cell(40, 6, 'Estado', 1, 0, 'C', 1);
 	$pdf->Cell(51, 6, 'Tribunal', 1, 1, 'C', 1);

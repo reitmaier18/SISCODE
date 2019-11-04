@@ -4,8 +4,8 @@
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="numero_expe" id="h" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                <label for="h">Numero del expediente</label>                            
+                <input type="text" name="numero_expe" id="h" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <label for="h">Número del expediente</label>                            
             </div>
             <div class="md-form col-md-2">
                 <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="nac">
@@ -16,19 +16,19 @@
             </div>
             <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="ci_procesado" id="i" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
-                <label for="i">Cedula del procesado</label>                            
+                <input type="text" name="ci_procesado" id="i" class="form-control validanumericos" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <label for="i">Cédula del procesado</label>                            
             </div>                                
         </div>
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="nombre_procesado" id="j" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="nombre_procesado" id="j" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="j">Nombre del procesado</label>                            
             </div>
             <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="apellido_procesado" id="k" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="apellido_procesado" id="k" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                 <label for="k">Apellido del procesado</label>                            
             </div>
         </div>
@@ -71,9 +71,9 @@
                     <option value="4">Corte 1</option>
                     <option value="5">Corte 2</option>
                     <option value="6">Corte 3</option>
-                    <option value="7">Sustanciacion</option>
-                    <option value="8">Secretaria del tribunal</option>
-                    <option value="9">Secretaria de la corte</option>
+                    <option value="7">Sustanciación</option>
+                    <option value="8">Secretaría del tribunal</option>
+                    <option value="9">Secretaría de la corte</option>
                     <option value="10">Archivo</option>
                 </select>                            
             </div>
@@ -84,11 +84,13 @@
                 </select>                            
             </div>
         </div>
-        <div class="input-group text-center" id="oculto">
+        
             <div class="md-form text-center">
-                <input type="button" class="btn btn-blue-grey text-center" id="btn-oculto" value="+" title="Añadir tribunal" data-toggle="modal" data-target="#añadir-tribunal">    
+                <center>
+                    <input type="button" class="btn btn-blue-grey text-center" id="btn-oculto" value="+" title="Añadir tribunal" data-toggle="modal" data-target="#añadir-tribunal">
+                </center>    
             </div>
-        </div>
+        
         <div class="input-group text-center">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" onclick="habilitar_expediente_asociado();" onblur="habilitar_expediente_asociado();" id="question" onclick="question();">
@@ -205,7 +207,9 @@ function añadir_tribunales(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-        alert(respuesta);
+        $("#mensaje").modal("show");
+        $("#mensaje_text").html(respuesta);
+        $("#añadir-tribunal").modal("hide");
     });
 }
 /*
@@ -218,7 +222,8 @@ function enviar_form_regis_expe(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
-        alert(respuesta);
+        $("#mensaje").modal("show");
+        $("#mensaje_text").html(respuesta);
         $('#form_regis_expe')[0].reset();
     });
 }
@@ -230,7 +235,6 @@ function habilitar_expediente_asociado(){
     if(question){
       $('#n_asociado').show();
       document.getElementById('numero_expediente_asociado').disabled=false;
-      
     }else{
       $('#n_asociado').hide();
       document.getElementById('numero_expediente_asociado').disabled=true;

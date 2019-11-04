@@ -80,7 +80,7 @@
                         
                     </div>
 
-                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_interna');" onclick="registrar_solicitud_int();">registrar</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_interna');" onclick="registrar_solicitud_int();">Solicitar</label></center>
                 </form>
                 <?php if ($_SESSION['rol']=='Archivista') { ?>
                 <form class="col-md-12 oc" id="form_sol_externa">
@@ -111,7 +111,6 @@
                             <input type="text" name="apellido" id="apellido_sol_ext" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)" placeholder="Apellido del solicitante">
                             <label for="apellido_sol_ext">Apellido del solicitante</label>                            
                         </div>
-                        
                     </div>
                     <div class="input-group">
                         <div class="md-form offset-md-1">
@@ -124,15 +123,14 @@
                                 <option disabled selected>Pieza</option>
                             </select>                            
                         </div>                                
-                        
                     </div>
-                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_externa');" onclick="registrar_solicitud_ext();">externa</label></center>
+                    <center><label class="btn btn-primary" onmouseover="val_formulario('#form_sol_externa');" onclick="registrar_solicitud_ext();">Solicitar</label></center>
                 </form>
             <?php } ?>
-            
-        
         </div>
     </div>
+</div>
+
 </div>
 <!-- Modal para listar los expedientes -->
 <div class="modal fade" id="expediente_modal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
@@ -146,7 +144,7 @@
                     <button class="btn btn-md btn-rounded btn-link btn-search  m-0 px-3" type="button" onclick="search_expe_list();"></button>
                     </div>
                   <input type="text" class="form-control" size="10" id="search_expe" placeholder="Buscar..." 
-                    aria-describedby="MaterialButton-addon4">
+                    aria-describedby="MaterialButton-addon4" onkeyup="onKeyUp(event,3)">
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="false">&times;</span>
@@ -171,10 +169,9 @@
                     </table>
                 </div>
             </div>
-        
+           
         </div>
     </div>
-</div>
 <script type="text/javascript">
 function mostrar_mod_solicitud_list() {
     document.getElementById('inicio').style.display="none";
@@ -371,33 +368,28 @@ function display_expe_list(){
 }
 
 function search_expe_list(){
-
   var dato = document.getElementById('search_expe').value;
   var reg = document.getElementById('l_expediente');
-  alert(dato);
   num = dato.substring(0,1);
   if (dato=='') {
-    
+    display_expe_list();
   }else{
     // Recorremos todas las filas con contenido de la tabla
-        for (let i = 0; i < reg.rows.length; i++) {
-          var fila = i+1;              
-          var celdas = reg.rows[i].getElementsByTagName('td');
-            for (let j = 1; j < celdas.length-5; j++) {
-              var dat=celdas[j].innerHTML;
-              if (dat==dato) {
-                $("#log"+fila).show();
-              }if(dato==dat.substring(0, dato.length)){
-                $("#log"+fila).show();
-              }else{
-                $("#log"+fila).hide();
-              }                
-            }
-          
-        }
+    for (let i = 0; i < reg.rows.length; i++) {
+      var fila = i+1;              
+      var celdas = reg.rows[i].getElementsByTagName('td');
+      for (let j = 1; j < celdas.length-4; j++) {
+        var dat=celdas[j].innerHTML;
+        if (dat==dato) {
+          $("#expe"+fila).show();
+        }if(dato==dat.substring(0, dato.length)){
+          $("#expe"+fila).show();
+        }else{
+          $("#expe"+fila).hide();
+        }                
+      }
+    }
   }
-  
-
 }
 
 function seleccion_expe_list(){

@@ -14,7 +14,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="Expedientes registrados"
-                      aria-selected="false" onclick="mostrar_estadistica();">Estadistica y gráficos</a>
+                      aria-selected="false" onclick="mostrar_estadistica();">Estadística y gráficos</a>
                   </li>
                 </ul>
             </div>
@@ -112,7 +112,7 @@
                         <th>#</th>
                         <th>Fecha de registro</th>
                         <th>N° expediente</th>
-                        <th>Cedula</th>
+                        <th>Cédula</th>
                         <th>Nombre</th>
                         <th>Estado</th>
                         <th>Tribunal</th>
@@ -179,7 +179,7 @@
                 <tbody id="l_reporte_estadistica">
                 </tbody>
             </table>
-            <center><button class="btn btn-primary" onclick="imprimir_reporte_estadistica();">Imprimir PDF</button> <button class="btn btn-blue-grey" onclick="reiniciar_reporte_estadistica();">Regresar</button> <button class="btn btn-success" onclick="mostrar_grafica();">Graficas</button></center>
+            <center><button class="btn btn-primary" onclick="imprimir_reporte_estadistica();">Imprimir PDF</button> <button class="btn btn-blue-grey" onclick="reiniciar_reporte_estadistica();">Regresar</button> <button class="btn btn-success" onclick="mostrar_grafica();">Gráficas</button></center>
             <br>
         </div>
     </div>

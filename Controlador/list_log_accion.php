@@ -5,7 +5,8 @@
 	$db = new db();
     $db->_construct();
     $sistem = new sistem();
-    $data = $sistem->listar_log();
+    $user=base64_encode($_POST['dato']);
+    $data = $sistem->listar_log($user);
     $fila=0;
     for ($i=0; $i < count($data); $i++) { 
         $fila++;

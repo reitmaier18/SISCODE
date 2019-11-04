@@ -60,7 +60,7 @@
                         $exp=$this->consultar_expediente($expediente);
                         $sql = ("insert into sisco.pieza (expediente_id, ubicacion_id, numero_pieza) values ('$exp[1]', '$ubicacion', 1)");
                         $query = pg_query($sql);
-                        echo "Se registro el expediente";
+                        echo "Se registró el expediente correctamente";
                     }        
                 }else{
                     $sql = ("insert into sisco.expediente (numero_expediente, tribunal_procesado_id, fecha_expediente, expediente_id) values ('$expediente', '$tri_pro[0]', '$fecha_registro', 0)");
@@ -71,7 +71,7 @@
                         $exp=$this->consultar_expediente($expediente);
                         $sql = ("insert into sisco.pieza (expediente_id, ubicacion_id, numero_pieza) values ('$exp[1]', '$ubicacion', 1)");
                         $query = pg_query($sql);
-                        return "Se registro el expediente";
+                        return "Se registró el expediente correctamente";
                         
                     }
                 }

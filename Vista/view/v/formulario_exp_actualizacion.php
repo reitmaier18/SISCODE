@@ -4,7 +4,7 @@
         <div class="md-form">
             <i class="prefix" onclick="enviar_form_consul_expe();"><img src="img/icon6.png"></i>
             <label for="search">Buscar...</label>
-            <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" required="true">
+            <input type="text" name="search" id="search" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase(); onKeyUp(event,2)" required="true">
         </div>
     </div>
     <!--a>rgba(136, 133, 133, 1)</a-->
@@ -15,7 +15,7 @@
                 <tr>
                     <th>#</th>
                     <th>N° expediente</th>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                     <th>Nombre</th>
                     <th>Estado</th>
                     <th>Tribunal</th>
@@ -64,9 +64,9 @@
                     <option value="4">Corte 1</option>
                     <option value="5">Corte 2</option>
                     <option value="6">Corte 3</option>
-                    <option value="7">Sustanciacion</option>
-                    <option value="8">Secretaria del tribunal</option>
-                    <option value="9">Secretaria de la corte</option>
+                    <option value="7">Sustanciación</option>
+                    <option value="8">Secretaría del tribunal</option>
+                    <option value="9">Secretaría de la corte</option>
                     <option value="10">Archivo</option>
                 </select>
                 
@@ -102,13 +102,13 @@
                 <form class="col-md-12" id="form_actualizar_expediente">
                             <div class="input-group">
                                 <div class="textbox col-md-4 offset-md-1" id="textbox1">
-                                    <label for="numero_expe_update">Numero del expediente</label>                            
-                                    <input type="text" name="numero_expe" id="numero_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="numero_expe_update">Número del expediente</label>                            
+                                    <input type="text" name="numero_expe" id="numero_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
                             
                                 <div class="textbox col-md-4 offset-md-1" id="oculto">
-                                    <label for="numero_expe_update">Numero del expediente</label>                            
-                                    <input type="text" name="id" id="val_oculto" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <label for="numero_expe_update">Número del expediente</label>                            
+                                    <input type="text" name="id" id="val_oculto" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
 
                                 <div class="md-form textbox col-md-2">
@@ -118,19 +118,19 @@
                                         <option value="2">E-</option>
                                     </select>
                                 </div>
-                                <div class="textbox col-md-4 " id="textbox1">
-                                    <label for="ci_proc_expe_update">Cedula del procesado</label>
-                                    <input type="text" name="ci_procesado" id="ci_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                <div class="textbox col-md-4" id="textbox1">
+                                    <label for="ci_proc_expe_update">Cédula del procesado</label>
+                                    <input type="text" name="ci_procesado" id="ci_proc_expe_update" class="form-control validanumericos" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>                                
                             </div>
                             <div class="input-group">
                                 <div class="textbox col-md-4 offset-md-1" id="textbox1">
                                     <label for="nombre_proc_expe_update">Nombre del procesado</label>                            
-                                    <input type="text" name="nombre_procesado" id="nombre_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <input type="text" name="nombre_procesado" id="nombre_proc_expe_update" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
                                 <div class="textbox col-md-4 offset-md-2" id="textbox1">
                                     <label for="apellido_proc_expe_update">Apellido del procesado</label>                            
-                                    <input type="text" name="apellido_procesado" id="apellido_proc_expe_update" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                                    <input type="text" name="apellido_procesado" id="apellido_proc_expe_update" class="form-control validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
                             </div>
                             <div class="input-group">
@@ -371,12 +371,5 @@ function update_expe(){
     });
 }
 
-//Buscador de expedientes segundo formulario
-/*
-$("#search").on('keyup', function (e) {
-  var keycode = e.keyCode || e.which;
-    if (keycode == 13) {
-        enviar_form_consul_expe();
-    }
-});*/
+
 </script>

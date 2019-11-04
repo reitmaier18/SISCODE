@@ -4,12 +4,12 @@
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="nombre" id="a" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="nombre" id="a" class="form-control validate validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="a">Nombre del funcionario</label>                            
             </div>
             <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="apellido" id="b" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
+                <input type="text" name="apellido" id="b" class="form-control validate validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return check(event)">
                 <label for="b">Apellido del funcionario</label>                            
             </div>
         </div>
@@ -23,8 +23,8 @@
             </div> 
             <div class="md-form textbox col-md-4 offset-md-0" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="ci" id="c" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <label for="c">Cedula del funcionario</label>                            
+                <input type="text" name="ci" id="c" class="form-control validate  validanumericos" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <label for="c">Cédula del funcionario</label>                            
             </div>
             <div class="md-form col-md-4">
                 <select class="browser-default custom-select custom-select-md mb-3 btn-blue-grey" name="rol" id="reg_rol">
@@ -40,7 +40,7 @@
         <div class="input-group">
             <div class="md-form textbox col-md-4 offset-md-1" id="textbox1">
                 <!--img src="img/icon2.png" class="prefix"-->
-                <input type="text" name="usuario" id="d" class="form-control validate" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input type="text" name="usuario" id="d" class="form-control validate validaletras" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <label for="d">Usuario del funcionario</label>                            
             </div>
             <div class="md-form textbox col-md-4 offset-md-2" id="textbox1">
@@ -59,9 +59,9 @@
                     <option value="4">Corte 1</option>
                     <option value="5">Corte 2</option>
                     <option value="6">Corte 3</option>
-                    <option value="7">Sustanciacion</option>
-                    <option value="8">Secretaria del tribunal</option>
-                    <option value="9">Secretaria de la corte</option>
+                    <option value="7">Sustanciación</option>
+                    <option value="8">Secretaría del tribunal</option>
+                    <option value="9">Secretaría de la corte</option>
                     <option value="10">Archivo</option>
                 </select>                            
             </div>
@@ -104,7 +104,8 @@ function enviar_form_reg_user() {
             $("#mensaje_text").html('El usuario no fue creado, información de identificación duplicada');    
         }else{
             $("#mensaje").modal("show");
-            $("#mensaje_text").html('El usuario fue creado exitosamente');    
+            $("#mensaje_text").html('El usuario fue creado exitosamente');
+            $('#form_reg_user')[0].reset();    
         }
     });
 }
