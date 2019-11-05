@@ -44,9 +44,8 @@ function gestionar_solicitud(){
         var pieza = $(this).find("td:eq(6)").text();
         var ubicacion = $(this).find("td:eq(7)").text();
         $.ajax({
-            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'ubicacion='+ubicacion,
+            url:'./../Controlador/gestionar_solicitud_contrl.php?n='+id+'&expediente='+expediente+'&pieza='+pieza+'&ubicacion='+ubicacion,
         }).done(function(respuesta){
-            
             if (respuesta==1) {
                 $("#mensaje").modal("show");
                 $("#mensaje_text").html('Solicitud actualizada');
@@ -56,8 +55,8 @@ function gestionar_solicitud(){
                 $("#mensaje_text").html('Surgió un error en la acción');
                 list_solicitud();
             }
-
-        });       
+            
+        }); 
     });   
 }
 
