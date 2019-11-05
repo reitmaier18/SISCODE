@@ -1,4 +1,10 @@
-<div class="col-md-10" id="solicitud_list">
+<?php 
+  if($_SESSION['rol']=='Administrador'||$_SESSION['rol']=='Jefe de archivo'||$_SESSION['rol']=='Archivista'||$_SESSION['rol']=='Alguacil') {
+    echo '<div class="col-md-12" id="solicitud_list">';
+  }else{
+    echo '<div class="col-md-10" id="solicitud_list">';
+  }
+  ?>
     <h2 class="h2-responsive font-weight-bold text-center my-5">Listado de solicitudes</h2>
     <div>
         <hr>
@@ -11,6 +17,7 @@
                 <th>Expediente</th>
                 <th>Pieza</th>
                 <th>Área solicitante</th>
+                <?php if($_SESSION['rol']=='Administrador'||$_SESSION['rol']=='Jefe de archivo'||$_SESSION['rol']=='Archivista'||$_SESSION['rol']=='Alguacil'){ echo '<th>Ubicación actual</th>'; } ?>
                 <th>Estatus</th>
                 <th>Acción</th>
             </thead>
@@ -426,10 +433,11 @@ function registrar_solicitud_int(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
+        list_solicitud();
         $('#solicitud_modal').modal('hide');
         $("#mensaje").modal("show");
         $("#mensaje_text").html('Se registro su solicitud');
-        list_solicitud();
+        
     });  
 }
 
@@ -440,10 +448,11 @@ function registrar_solicitud_ext(){
         type:'POST',
         data: dato,
     }).done(function(respuesta){
+        list_solicitud();
         $('#solicitud_modal').modal('hide');
         $("#mensaje").modal("show");
         $("#mensaje_text").html('Se registro su solicitud');
-        list_solicitud();
+        
     });  
 }
 </script>

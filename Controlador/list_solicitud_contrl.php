@@ -22,7 +22,8 @@
 					echo "<td>".$dat[$i]['tipo']."</td>";
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
-					echo "<td>".$dat[$i]['ubicacion']."</td>";
+					echo "<td>".$dat[$i]['area_solicitante']."</td>";
+					echo "<td>".$dat[$i]['ubicacion_actual']."</td>";
 					switch ($dat[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
@@ -50,7 +51,8 @@
 					echo "<td>".$data[$i]['tipo']."</td>";
 					echo "<td>".$data[$i]['numero_expediente']."</td>";
 					echo "<td>".$data[$i]['numero_pieza']."</td>";
-					echo "<td>".$data[$i]['ubicacion']."</td>";
+					echo "<td>".$data[$i]['area_solicitante']."</td>";
+					echo "<td>".$data[$i]['ubicacion_actual']."</td>";
 					switch ($data[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
@@ -83,7 +85,8 @@
 					echo "<td>".$dat[$i]['tipo']."</td>";
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
-					echo "<td>".$dat[$i]['ubicacion']."</td>";
+					echo "<td>".$dat[$i]['area_solicitante']."</td>";
+					echo "<td>".$dat[$i]['ubicacion_actual']."</td>";
 					switch ($dat[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
@@ -114,7 +117,8 @@
 					echo "<td>".$data[$i]['tipo']."</td>";
 					echo "<td>".$data[$i]['numero_expediente']."</td>";
 					echo "<td>".$data[$i]['numero_pieza']."</td>";
-					echo "<td>".$data[$i]['ubicacion']."</td>";
+					echo "<td>".$data[$i]['area_solicitante']."</td>";
+					echo "<td>".$data[$i]['ubicacion_actual']."</td>";
 					switch ($data[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
@@ -151,7 +155,8 @@
 					echo "<td>".$dat[$i]['tipo']."</td>";
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
-					echo "<td>".$dat[$i]['ubicacion']."</td>";
+					echo "<td>".$dat[$i]['area_solicitante']."</td>";
+					echo "<td>".$dat[$i]['ubicacion_actual']."</td>";
 					switch ($dat[$i]['estatus']) {
 						case '1':
 							echo "<td>Aprobado</td>";
@@ -177,7 +182,8 @@
 					echo "<td>".$data[$i]['tipo']."</td>";
 					echo "<td>".$data[$i]['numero_expediente']."</td>";
 					echo "<td>".$data[$i]['numero_pieza']."</td>";
-					echo "<td>".$data[$i]['ubicacion']."</td>";
+					echo "<td>".$data[$i]['area_solicitante']."</td>";
+					echo "<td>".$data[$i]['ubicacion_actual']."</td>";
 					switch ($data[$i]['estatus']) {
 						case '1':
 							echo "<td>Aprobado</td>";
@@ -209,7 +215,8 @@
 					echo "<td>".$dat[$i]['tipo']."</td>";
 					echo "<td>".$dat[$i]['numero_expediente']."</td>";
 					echo "<td>".$dat[$i]['numero_pieza']."</td>";
-					echo "<td>".$dat[$i]['ubicacion']."</td>";
+					echo "<td>".$dat[$i]['area_solicitante']."</td>";
+					echo "<td>".$dat[$i]['ubicacion_actual']."</td>";
 					switch ($dat[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
@@ -240,7 +247,8 @@
 					echo "<td>".$data[$i]['tipo']."</td>";
 					echo "<td>".$data[$i]['numero_expediente']."</td>";
 					echo "<td>".$data[$i]['numero_pieza']."</td>";
-					echo "<td>".$data[$i]['ubicacion']."</td>";
+					echo "<td>".$data[$i]['area_solicitante']."</td>";
+					echo "<td>".$data[$i]['ubicacion_actual']."</td>";
 					switch ($data[$i]['estatus']) {
 						case '0':
 							echo "<td>Iniciado</td>";
