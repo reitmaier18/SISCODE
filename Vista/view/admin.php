@@ -13,10 +13,10 @@
 <!--Este es el header-->
 <?php require 'v/menu_commun.php'; ?>
     <!--Aqui comienza la pantalla donde se encuentran los formularios -->
-    <section class="my-5 inicio">
+    <section class="my-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
                     <!--Inicio-->
                     <?php require 'v/inicio_commun.php'; ?>
                     <!--Formularios del usuario -->
@@ -36,7 +36,6 @@
                     <!-- Reportes de inventario-->
                     <?php require 'v/reporte_inventario.php'; ?>
                     <!--Hasta aqui llega el container-->
-                </div>
             </div>
         </div>
     </section>

@@ -1,5 +1,5 @@
 <div class="col-md-10" id="inicio">
-    <h2 class="h2-responsive font-weight-bold text-center my-5"> Sistema de Control y Distribución de Expedientes</h2>
+    <h2 class="h2-responsive font-weight-bold text-center my-5"> Sistema de Prestamo y Control de Expedientes</h2>
     <h2 class="h2-responsive font-weight-bold text-center my-5">¡Bienvenido! <?php echo $_SESSION['nombre']." ".$_SESSION['apellido']; ?></h2>                        
 </div>
 <script type="text/javascript">
