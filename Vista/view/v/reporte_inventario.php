@@ -224,12 +224,12 @@ function mostrar_nex_exp_est(){
 }
 
 function mostrar_pre_exp_est(){
-  x = document.getElementById('act_inventario').value;    
+  x = document.getElementById('act_exp_est').value;    
   x = parseInt(x)-1;
   if(x==0){
     x=x+1;
   }
-  document.getElementById('act_inventario').value=x;
+  document.getElementById('act_exp_est').value=x;
   element = 4*x;
   y=element-4;
   for (let index = 1; index < y; index++){

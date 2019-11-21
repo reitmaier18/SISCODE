@@ -231,7 +231,7 @@
         }
 
         function expediente_por_estado(){
-            $sql=("select estado, count(numero_expediente) as cantidad from sisco.tribunal_procesado inner join sisco.tribunal on sisco.tribunal_procesado.tribunal_id = sisco.tribunal.id inner join sisco.estado on sisco.tribunal.estado_id = sisco.estado.id inner join sisco.expediente on sisco.tribunal_procesado.id = sisco.expediente.tribunal_procesado_id group by estado");
+            $sql=("select a.estado, count(numero_expediente) as cantidad from sisco.estado as a left join sisco.tribunal as b on a.id=b.estado_id left join sisco.tribunal_procesado as c on b.id=c.tribunal_id left join sisco.expediente as d on c.id = d.tribunal_procesado_id group by a.estado");
             $query = pg_query($sql);
             $fila=pg_fetch_all($query);
             return $fila;   
