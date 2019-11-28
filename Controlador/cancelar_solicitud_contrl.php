@@ -10,5 +10,7 @@
     $solicitud = new solicitud();
     $sistem = new sistem();
     $action=$solicitud->cancelar_solicitud($_GET['n']);
+    $log = "canceló la solicitud".$_GET['n'];
+	$sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
     echo $action;
 ?>

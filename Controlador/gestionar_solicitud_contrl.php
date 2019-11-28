@@ -13,11 +13,15 @@
 	switch ($_SESSION['rol']) {
 		case 'Jefe de archivo':
 			$action=$solicitud->aprobar_solicitud($_GET['n']);
+			$log = "aprobó la solicitud".$_GET['n'];
+			$sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
 			echo $action;
 			break;
 		
 		case 'Alguacil':
 			$action=$solicitud->transportar_solicitud($_GET['n']);
+			$log = "transportó la solicitud".$_GET['n'];
+			$sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
 			echo $action;
 			break;
 
@@ -26,6 +30,8 @@
 			if ($action==1) {
 				$a=$expediente->update_pieza_ubicacion($_GET['expediente'], $_GET['pieza'], $_GET['ubicacion']);
 				if ($a=='True') {
+					$log = "Recibió la solicitud".$_GET['n'];
+					$sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
 					echo $action;
 				}else{
 					echo 0;
@@ -40,6 +46,8 @@
 			if ($action==1) {
 				$a=$expediente->update_pieza_ubicacion($_GET['expediente'], $_GET['pieza'], $_GET['ubicacion']);
 				if ($a=='True') {
+					$log = "Recibió la solicitud".$_GET['n'];
+					$sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
 					echo $action;
 					
 				}else{
