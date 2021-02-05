@@ -8,9 +8,10 @@
          * Función para consultar el numero de expediente
          */ 
         function consultar_expediente($expediente){
-            $sql = ("select numero_expediente, id, tribunal_procesado_id from sisco.expediente where numero_expediente = '$expediente'");
+            $sql = ("select numero_expediente, id, tribunal_procesado_id from sisco.expediente where numero_expediente = '$expediente' limit 1");
             $query = pg_query($sql);
-            $fila=pg_fetch_array($query, 0, PGSQL_NUM);
+            //$fila=pg_fetch_array($query, 0, PGSQL_NUM);
+            $fila = pg_fetch_all($query);
             return $fila;
         }
         function consultar_tribunal_procesado($procesado, $tribunal){
@@ -117,13 +118,20 @@
             }
         }
         function consultar_datos_expediente($expediente){
+            
             $exp=$this->consultar_expediente($expediente);
-            if ($exp[0] == $expediente) {
-                $tri_pro = $this->consul_tribunal_procesado_update($exp[1]);
-                return $tri_pro;
+            
+            if (is_array($exp)) {
+                if ($exp[0]['numero_expediente'] == $expediente) {
+                    $tri_pro = $this->consul_tribunal_procesado_update($exp[0]['id']);
+                    return $tri_pro;
+                }else{
+                    return 'Este expediente no existe';
+                }
             }else{
                 return 'Este expediente no existe';
             }
+            
             //var_dump($expediente);
         }
 

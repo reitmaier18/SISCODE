@@ -6,6 +6,7 @@ function formulario_login() {
     type: 'POST',
     data: envio,
   }).done(function (respuesta) {
+    
     var datos = eval(respuesta);
     //alert(datos);
     /*

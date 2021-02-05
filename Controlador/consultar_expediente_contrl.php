@@ -12,6 +12,7 @@
     $tribunal = new tribunal();
     $sistem = new sistem();
     $data = $expediente->consultar_datos_expediente($_POST['value']);
+    
     if ($data=='Este expediente no existe') {
         $log = "Error al consultar expediente";
         $sistem->registrar_log($_SESSION['id'], $_SESSION['IP'], $log);
